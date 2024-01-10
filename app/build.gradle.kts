@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-	namespace = "com.example.triviagameapp"
+	namespace = "com.net3hings.triviagameapp"
 	compileSdk = 34
 
 	defaultConfig {
-		applicationId = "com.example.triviagameapp"
+		applicationId = "com.net3hings.triviagameapp"
 		minSdk = 26
 		targetSdk = 34
 		versionCode = 1

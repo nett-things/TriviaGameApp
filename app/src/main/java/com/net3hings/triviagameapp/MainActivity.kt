@@ -1,8 +1,8 @@
-package com.example.triviagameapp
+package com.net3hings.triviagameapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.triviagameapp.databinding.ActivityMainBinding
+import com.net3hings.triviagameapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 	private lateinit var binding: ActivityMainBinding

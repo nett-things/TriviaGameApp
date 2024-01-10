@@ -1,4 +1,4 @@
-package com.example.triviagameapp
+package com.net3hings.triviagameapp
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
