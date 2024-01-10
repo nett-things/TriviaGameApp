@@ -1,3 +1,11 @@
 <resources>
 	<string name="app_name">TriviaGameApp</string>
+	<string name="current_score_text">Current score: %d</string>
+	<string name="question_label_text">Question %d</string>
+	<string name="dummy_question">Lake Titicaca is located between which two nations?</string>
+	<string name="question_prompt">What is your answer?</string>
+	<string name="dummy_answer_a">Peru and Bolivia</string>
+	<string name="dummy_answer_b">Kenya and Uganda</string>
+	<string name="dummy_answer_c">Mexico and the United States</string>
+	<string name="dummy_answer_d">India and Bangladesh</string>
 </resources>
