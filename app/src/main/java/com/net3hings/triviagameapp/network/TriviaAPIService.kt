@@ -11,7 +11,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://opentdb.com/"
-private const val QUESTIONS_ENDPOINT = "api.php?amount=10"
+private const val QUESTIONS_ENDPOINT = "api.php?amount=10&type=multiple"
 //private const val QUERY_ENDPOINT = "map_service.html"
 
 private val moshi = Moshi.Builder()
