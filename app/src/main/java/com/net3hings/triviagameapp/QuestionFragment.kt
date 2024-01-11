@@ -1,16 +1,274 @@
 package com.net3hings.triviagameapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Html
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import com.net3hings.triviagameapp.databinding.FragmentQuestionBinding
+import com.net3hings.triviagameapp.network.TriviaAPI
+import com.net3hings.triviagameapp.question.Question
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class QuestionFragment : Fragment() {
+	private lateinit var binding: FragmentQuestionBinding
+	private var questions: ArrayList<Question> = arrayListOf()
+
+	private var currentQuestion: Int = 0
+	private var score: Int = 0
+	private var waitForClick: Boolean = false
+
+	private enum class Answer {
+		A, B, C, D, TRUE, FALSE
+	}
+
+	private lateinit var answer: Answer
+
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View? {
-		return inflater.inflate(R.layout.fragment_question, container, false)
+	): View {
+		binding = FragmentQuestionBinding.inflate(inflater, container, false)
+
+		return binding.root
+	}
+
+	@SuppressLint("ClickableViewAccessibility")
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+
+		populateQuestions()
+
+		binding.answerACard.setOnClickListener {
+			resolveAnswer(Answer.A)
+		}
+
+		binding.answerBCard.setOnClickListener {
+			resolveAnswer(Answer.B)
+		}
+
+		binding.answerCCard.setOnClickListener {
+			resolveAnswer(Answer.C)
+		}
+
+		binding.answerDCard.setOnClickListener {
+			resolveAnswer(Answer.D)
+		}
+
+		binding.answerTrueCard.setOnClickListener {
+			resolveAnswer(Answer.TRUE)
+		}
+
+		binding.answerFalseCard.setOnClickListener {
+			resolveAnswer(Answer.FALSE)
+		}
+
+		binding.container.setOnTouchListener { _, event ->
+			if(event.action == MotionEvent.ACTION_DOWN)
+				if(waitForClick) {
+					waitForClick = false
+					nextQuestion()
+				}
+
+			true
+		}
+	}
+
+	@OptIn(DelicateCoroutinesApi::class)
+	fun populateQuestions() {
+		GlobalScope.launch {
+			try {
+				questions = GlobalScope.async {
+					withContext(Dispatchers.IO) {
+						ArrayList(TriviaAPI.retrofitService.getQuestions().items)
+					}
+				}.await()
+
+			} catch(e: Exception) {
+				Log.e(activity?.localClassName, e.message.toString())
+			}
+
+			withContext(Dispatchers.Main) {
+				prepareAnswer()
+				displayTrivia()
+			}
+		}
+	}
+
+	private fun nextQuestion() {
+		currentQuestion++
+
+		resetAnswers()
+
+		prepareAnswer()
+		displayTrivia()
+	}
+
+	private fun prepareAnswer() {
+		if(questions[currentQuestion].type == Question.Type.MULTIPLE) {
+			answer = when(('A'..'D').random()) {
+				'A' -> Answer.A
+				'B' -> Answer.B
+				'C' -> Answer.C
+				'D' -> Answer.D
+				else -> Answer.A
+			}
+
+		} else {
+			answer = when(questions[currentQuestion].correctAnswer) {
+				"True" -> Answer.TRUE
+				"False" -> Answer.FALSE
+				else -> Answer.TRUE
+			}
+		}
+	}
+
+	private fun displayTrivia() {
+		binding.scoreLabel.text = getString(R.string.current_score_text, score)
+
+		binding.questionLabel.text = getString(R.string.question_label_text, currentQuestion + 1)
+		binding.questionContentLabel.text =
+			Html.fromHtml(questions[currentQuestion].question, Html.FROM_HTML_MODE_COMPACT).toString()
+
+		binding.promptLabel.text = getString(R.string.question_prompt)
+
+		if(questions[currentQuestion].type == Question.Type.MULTIPLE) {
+			prepareForMultipleChoice()
+
+			when(answer) {
+				Answer.A -> {
+					binding.answerALabel.text = Html.fromHtml(questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+				}
+
+				Answer.B -> {
+					binding.answerALabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBLabel.text = Html.fromHtml(questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+				}
+
+				Answer.C -> {
+					binding.answerALabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCLabel.text = Html.fromHtml(questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+				}
+
+				Answer.D -> {
+					binding.answerALabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDLabel.text = Html.fromHtml(questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+				}
+
+				else -> {
+					binding.answerALabel.text = Html.fromHtml(questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+				}
+			}
+
+		} else {
+			prepareForBooleanChoice()
+		}
+	}
+
+	private fun prepareForMultipleChoice() {
+		// make the boolean choice elements gone
+		binding.answerTrueCard.visibility = View.GONE
+		binding.answerFalseCard.visibility = View.GONE
+		binding.answerFalseCardSpace.visibility = View.GONE
+
+		// make the multiple choice elements visible
+		binding.answerACard.visibility = View.VISIBLE
+		binding.answerBCard.visibility = View.VISIBLE
+		binding.answerCCard.visibility = View.VISIBLE
+		binding.answerDCard.visibility = View.VISIBLE
+		binding.answerDCardSpace.visibility = View.VISIBLE
+	}
+
+	private fun prepareForBooleanChoice() {
+		// make the multiple choice elements gone
+		binding.answerACard.visibility = View.GONE
+		binding.answerBCard.visibility = View.GONE
+		binding.answerCCard.visibility = View.GONE
+		binding.answerDCard.visibility = View.GONE
+		binding.answerDCardSpace.visibility = View.GONE
+
+		// make the boolean choice elements visible
+		binding.answerTrueCard.visibility = View.VISIBLE
+		binding.answerFalseCard.visibility = View.VISIBLE
+		binding.answerFalseCardSpace.visibility = View.VISIBLE
+	}
+
+	private fun resolveAnswer(buttonClicked: Answer) {
+		// mark all wrong
+		binding.answerACard.setCardBackgroundColor(requireContext().getColor(R.color.red))
+		binding.answerBCard.setCardBackgroundColor(requireContext().getColor(R.color.red))
+		binding.answerCCard.setCardBackgroundColor(requireContext().getColor(R.color.red))
+		binding.answerDCard.setCardBackgroundColor(requireContext().getColor(R.color.red))
+		binding.answerTrueCard.setCardBackgroundColor(requireContext().getColor(R.color.red))
+		binding.answerFalseCard.setCardBackgroundColor(requireContext().getColor(R.color.red))
+
+		// mark the correct answer
+		when(answer) {
+			Answer.A -> binding.answerACard.setCardBackgroundColor(requireContext().getColor(R.color.green))
+			Answer.B -> binding.answerBCard.setCardBackgroundColor(requireContext().getColor(R.color.green))
+			Answer.C -> binding.answerCCard.setCardBackgroundColor(requireContext().getColor(R.color.green))
+			Answer.D -> binding.answerDCard.setCardBackgroundColor(requireContext().getColor(R.color.green))
+			Answer.TRUE -> binding.answerTrueCard.setCardBackgroundColor(requireContext().getColor(R.color.green))
+			Answer.FALSE -> binding.answerFalseCard.setCardBackgroundColor(requireContext().getColor(R.color.green))
+		}
+
+		// disable clicking
+		binding.answerACard.isClickable = false
+		binding.answerBCard.isClickable = false
+		binding.answerCCard.isClickable = false
+		binding.answerDCard.isClickable = false
+		binding.answerTrueCard.isClickable = false
+		binding.answerFalseCard.isClickable = false
+
+		// update the prompt
+		binding.promptLabel.text =
+			if(buttonClicked == answer)
+				getString(R.string.correct_answer_msg)
+			else
+				getString(R.string.wrong_answer_msg)
+
+		// wait for click on screen to advance
+		waitForClick = true
+	}
+
+	private fun resetAnswers() {
+		binding.answerACard.setCardBackgroundColor(requireContext().getColor(R.color.white))
+		binding.answerACard.isClickable = true
+
+		binding.answerBCard.setCardBackgroundColor(requireContext().getColor(R.color.white))
+		binding.answerBCard.isClickable = true
+
+		binding.answerCCard.setCardBackgroundColor(requireContext().getColor(R.color.white))
+		binding.answerCCard.isClickable = true
+
+		binding.answerDCard.setCardBackgroundColor(requireContext().getColor(R.color.white))
+		binding.answerDCard.isClickable = true
+
+		binding.answerTrueCard.setCardBackgroundColor(requireContext().getColor(R.color.white))
+		binding.answerTrueCard.isClickable = true
+
+		binding.answerFalseCard.setCardBackgroundColor(requireContext().getColor(R.color.white))
+		binding.answerFalseCard.isClickable = true
 	}
 }
