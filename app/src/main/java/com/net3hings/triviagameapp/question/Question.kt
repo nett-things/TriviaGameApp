@@ -30,14 +30,14 @@ data class Question(
 
 	@Json(name = "incorrect_answers")
 	val incorrectAnswers: List<String>
-): Parcelable
+): Parcelable {
+	enum class Type {
+		MULTIPLE, BOOLEAN
+	}
 
-enum class Type {
-	MULTIPLE, BOOLEAN
-}
-
-enum class Difficulty {
-	EASY, MEDIUM, HARD
+	enum class Difficulty {
+		EASY, MEDIUM, HARD
+	}
 }
 
 @Retention(AnnotationRetention.RUNTIME)
@@ -47,19 +47,19 @@ annotation class QuestionType
 /** Converts question type strings to a question type enum.  */
 class QuestionTypeAdapter {
 	@ToJson
-	fun toJson(@QuestionType type: Type): String {
+	fun toJson(@QuestionType type: Question.Type): String {
 		return when(type) {
-			Type.MULTIPLE -> "multiple"
-			Type.BOOLEAN -> "boolean"
+			Question.Type.MULTIPLE -> "multiple"
+			Question.Type.BOOLEAN -> "boolean"
 		}
 	}
 
 	@FromJson
-	@QuestionType fun fromJson(type: String): Type {
+	@QuestionType fun fromJson(type: String): Question.Type {
 		return when(type) {
-			"multiple" -> Type.MULTIPLE
-			"boolean" -> Type.BOOLEAN
-			else -> Type.MULTIPLE
+			"multiple" -> Question.Type.MULTIPLE
+			"boolean" -> Question.Type.BOOLEAN
+			else -> Question.Type.MULTIPLE
 		}
 	}
 }
@@ -71,21 +71,21 @@ annotation class QuestionDifficulty
 /** Converts question difficulty strings to a difficulty type enum.  */
 class QuestionDifficultyAdapter {
 	@ToJson
-	fun toJson(@QuestionDifficulty difficulty: Difficulty): String {
+	fun toJson(@QuestionDifficulty difficulty: Question.Difficulty): String {
 		return when(difficulty) {
-			Difficulty.EASY -> "easy"
-			Difficulty.MEDIUM -> "medium"
-			Difficulty.HARD -> "hard"
+			Question.Difficulty.EASY -> "easy"
+			Question.Difficulty.MEDIUM -> "medium"
+			Question.Difficulty.HARD -> "hard"
 		}
 	}
 
 	@FromJson
-	@QuestionDifficulty fun fromJson(difficulty: String): Difficulty {
+	@QuestionDifficulty fun fromJson(difficulty: String): Question.Difficulty {
 		return when(difficulty) {
-			"easy" -> Difficulty.EASY
-			"medium" -> Difficulty.MEDIUM
-			"hard" -> Difficulty.HARD
-			else -> Difficulty.EASY
+			"easy" -> Question.Difficulty.EASY
+			"medium" -> Question.Difficulty.MEDIUM
+			"hard" -> Question.Difficulty.HARD
+			else -> Question.Difficulty.EASY
 		}
 	}
 }
