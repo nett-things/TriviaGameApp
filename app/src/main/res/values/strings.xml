@@ -10,4 +10,5 @@
 	<string name="dummy_answer_d">India and Bangladesh</string>
 	<string name="correct_answer_msg">Correct answer!</string>
 	<string name="wrong_answer_msg">Wrong answer!</string>
+	<string name="loading_msg">Loading the trivia questions...</string>
 </resources>
