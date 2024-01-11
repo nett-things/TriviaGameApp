@@ -15,4 +15,8 @@
 	<string name="quit_game_prompt">Are you sure you want quit the game?</string>
 	<string name="yes_button">YES</string>
 	<string name="no_button">NO</string>
+	<string name="category_label_text">Select Category:</string>
+	<string name="difficulty_label_text">Select Difficulty:</string>
+	<string name="type_label_text">Select Type:</string>
+	<string name="start_game_button">Start game</string>
 </resources>
