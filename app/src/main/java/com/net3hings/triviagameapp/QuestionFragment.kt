@@ -3,25 +3,18 @@ package com.net3hings.triviagameapp
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.net3hings.triviagameapp.databinding.FragmentQuestionBinding
-import com.net3hings.triviagameapp.network.TriviaAPI
 import com.net3hings.triviagameapp.question.Question
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class QuestionFragment : Fragment() {
 	private lateinit var binding: FragmentQuestionBinding
-	private var questions: ArrayList<Question> = arrayListOf()
+	val args: QuestionFragmentArgs by navArgs()
 
 	private var currentQuestion: Int = 0
 	private var score: Int = 0
@@ -46,31 +39,15 @@ class QuestionFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		populateQuestions()
+		prepareAnswer()
+		displayTrivia()
 
-		binding.answerACard.setOnClickListener {
-			resolveAnswer(Answer.A)
-		}
-
-		binding.answerBCard.setOnClickListener {
-			resolveAnswer(Answer.B)
-		}
-
-		binding.answerCCard.setOnClickListener {
-			resolveAnswer(Answer.C)
-		}
-
-		binding.answerDCard.setOnClickListener {
-			resolveAnswer(Answer.D)
-		}
-
-		binding.answerTrueCard.setOnClickListener {
-			resolveAnswer(Answer.TRUE)
-		}
-
-		binding.answerFalseCard.setOnClickListener {
-			resolveAnswer(Answer.FALSE)
-		}
+		binding.answerACard.setOnClickListener { resolveAnswer(Answer.A) }
+		binding.answerBCard.setOnClickListener { resolveAnswer(Answer.B) }
+		binding.answerCCard.setOnClickListener { resolveAnswer(Answer.C) }
+		binding.answerDCard.setOnClickListener { resolveAnswer(Answer.D) }
+		binding.answerTrueCard.setOnClickListener { resolveAnswer(Answer.TRUE) }
+		binding.answerFalseCard.setOnClickListener { resolveAnswer(Answer.FALSE) }
 
 		binding.container.setOnTouchListener { _, event ->
 			if(event.action == MotionEvent.ACTION_DOWN)
@@ -80,27 +57,6 @@ class QuestionFragment : Fragment() {
 				}
 
 			true
-		}
-	}
-
-	@OptIn(DelicateCoroutinesApi::class)
-	fun populateQuestions() {
-		GlobalScope.launch {
-			try {
-				questions = GlobalScope.async {
-					withContext(Dispatchers.IO) {
-						ArrayList(TriviaAPI.retrofitService.getQuestions().items)
-					}
-				}.await()
-
-			} catch(e: Exception) {
-				Log.e(activity?.localClassName, e.message.toString())
-			}
-
-			withContext(Dispatchers.Main) {
-				prepareAnswer()
-				displayTrivia()
-			}
 		}
 	}
 
@@ -114,7 +70,7 @@ class QuestionFragment : Fragment() {
 	}
 
 	private fun prepareAnswer() {
-		if(questions[currentQuestion].type == Question.Type.MULTIPLE) {
+		if(args.questions[currentQuestion].type == Question.Type.MULTIPLE) {
 			answer = when(('A'..'D').random()) {
 				'A' -> Answer.A
 				'B' -> Answer.B
@@ -124,7 +80,7 @@ class QuestionFragment : Fragment() {
 			}
 
 		} else {
-			answer = when(questions[currentQuestion].correctAnswer) {
+			answer = when(args.questions[currentQuestion].correctAnswer) {
 				"True" -> Answer.TRUE
 				"False" -> Answer.FALSE
 				else -> Answer.TRUE
@@ -137,47 +93,47 @@ class QuestionFragment : Fragment() {
 
 		binding.questionLabel.text = getString(R.string.question_label_text, currentQuestion + 1)
 		binding.questionContentLabel.text =
-			Html.fromHtml(questions[currentQuestion].question, Html.FROM_HTML_MODE_COMPACT).toString()
+			Html.fromHtml(args.questions[currentQuestion].question, Html.FROM_HTML_MODE_COMPACT).toString()
 
 		binding.promptLabel.text = getString(R.string.question_prompt)
 
-		if(questions[currentQuestion].type == Question.Type.MULTIPLE) {
+		if(args.questions[currentQuestion].type == Question.Type.MULTIPLE) {
 			prepareForMultipleChoice()
 
 			when(answer) {
 				Answer.A -> {
-					binding.answerALabel.text = Html.fromHtml(questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerBLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerCLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerDLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerALabel.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
 				}
 
 				Answer.B -> {
-					binding.answerALabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerBLabel.text = Html.fromHtml(questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerCLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerDLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerALabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBLabel.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
 				}
 
 				Answer.C -> {
-					binding.answerALabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerBLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerCLabel.text = Html.fromHtml(questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerDLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerALabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCLabel.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
 				}
 
 				Answer.D -> {
-					binding.answerALabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerBLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerCLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerDLabel.text = Html.fromHtml(questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerALabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDLabel.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
 				}
 
 				else -> {
-					binding.answerALabel.text = Html.fromHtml(questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerBLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerCLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerDLabel.text = Html.fromHtml(questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerALabel.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
 				}
 			}
 
