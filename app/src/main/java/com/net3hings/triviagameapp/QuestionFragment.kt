@@ -39,9 +39,11 @@ class QuestionFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
+		// prepare the game
 		prepareAnswer()
 		displayTrivia()
 
+		// set up the listeners for the answer buttons
 		binding.answerACard.setOnClickListener { resolveAnswer(Answer.A) }
 		binding.answerBCard.setOnClickListener { resolveAnswer(Answer.B) }
 		binding.answerCCard.setOnClickListener { resolveAnswer(Answer.C) }
@@ -49,6 +51,7 @@ class QuestionFragment : Fragment() {
 		binding.answerTrueCard.setOnClickListener { resolveAnswer(Answer.TRUE) }
 		binding.answerFalseCard.setOnClickListener { resolveAnswer(Answer.FALSE) }
 
+		// set up the listener for the continuing the game
 		binding.container.setOnTouchListener { _, event ->
 			if(event.action == MotionEvent.ACTION_DOWN)
 				if(waitForClick) {
