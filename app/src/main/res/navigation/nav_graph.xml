@@ -11,8 +11,8 @@
 		android:label="fragment_menu"
 		tools:layout="@layout/fragment_menu" >
 		<action
-			android:id="@+id/action_menuFragment_to_loadingFragment"
-			app:destination="@id/loadingFragment" />
+			android:id="@+id/action_menuFragment_to_setupFragment"
+			app:destination="@id/setupFragment" />
 	</fragment>
 	<fragment
 		android:id="@+id/questionFragment"
@@ -31,5 +31,14 @@
 		<action
 			android:id="@+id/action_loadingFragment_to_questionFragment"
 			app:destination="@id/questionFragment" />
+	</fragment>
+	<fragment
+		android:id="@+id/setupFragment"
+		android:name="com.net3hings.triviagameapp.SetupFragment"
+		android:label="fragment_setup"
+		tools:layout="@layout/fragment_setup" >
+		<action
+			android:id="@+id/action_setupFragment_to_loadingFragment"
+			app:destination="@id/loadingFragment" />
 	</fragment>
 </navigation>

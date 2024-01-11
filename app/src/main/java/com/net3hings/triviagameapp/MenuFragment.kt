@@ -24,7 +24,7 @@ class MenuFragment : Fragment() {
 		super.onViewCreated(view, savedInstanceState)
 
 		binding.startGameButton.setOnClickListener {
-			findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToLoadingFragment())
+			findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToSetupFragment())
 		}
 	}
 }
