@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.net3hings.triviagameapp.databinding.FragmentLoadingBinding
 import com.net3hings.triviagameapp.network.TriviaAPI
 import com.net3hings.triviagameapp.question.Question
@@ -20,7 +21,7 @@ import kotlinx.coroutines.withContext
 class LoadingFragment : Fragment() {
 	private lateinit var binding: FragmentLoadingBinding
 
-	private var questions: ArrayList<Question> = arrayListOf()
+	private var questions: ArrayList<Question>? = null
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +53,12 @@ class LoadingFragment : Fragment() {
 			}
 
 			withContext(Dispatchers.Main) {
-				findNavController().navigate(LoadingFragmentDirections.actionLoadingFragmentToQuestionFragment(questions.toTypedArray()))
+				if(questions != null)
+					findNavController().navigate(LoadingFragmentDirections.actionLoadingFragmentToQuestionFragment(questions!!.toTypedArray()))
+				else {
+					Snackbar.make(binding.root, getString(R.string.cannot_load_msg), Snackbar.LENGTH_LONG).show()
+					findNavController().popBackStack()
+				}
 			}
 		}
 	}
