@@ -17,7 +17,7 @@ import com.net3hings.triviagameapp.question.Question
 
 class QuestionFragment : Fragment() {
 	private lateinit var binding: FragmentQuestionBinding
-	val args: QuestionFragmentArgs by navArgs()
+	private val args: QuestionFragmentArgs by navArgs()
 
 	private var currentQuestion: Int = 0
 	private var score: Int = 0
