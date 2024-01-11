@@ -1,6 +1,7 @@
 package com.net3hings.triviagameapp
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Html
 import androidx.fragment.app.Fragment
@@ -8,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.net3hings.triviagameapp.databinding.FragmentQuestionBinding
 import com.net3hings.triviagameapp.question.Question
@@ -38,6 +41,18 @@ class QuestionFragment : Fragment() {
 	@SuppressLint("ClickableViewAccessibility")
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		// set up the listener for handling the go back button
+		requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+			override fun handleOnBackPressed() {
+				AlertDialog.Builder(context)
+					.setMessage(getString(R.string.quit_game_prompt))
+					.setPositiveButton(getString(R.string.yes_button)) { _, _ -> findNavController().popBackStack(R.id.menuFragment, false) }
+					.setNegativeButton(getString(R.string.no_button)) { _, _ -> }
+					.create()
+					.show()
+			}
+		})
 
 		// prepare the game
 		prepareAnswer()
