@@ -67,7 +67,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginTop="32dp"
 					android:layout_marginBottom="32dp"
-					android:text="@string/dummy_question"
+					tools:text="@string/dummy_question"
 					android:textAlignment="center"
 					android:textAllCaps="false"
 					android:textSize="24sp"
@@ -102,6 +102,8 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_margin="4dp"
+				android:clickable="true"
+				android:foreground="?android:selectableItemBackground"
 				app:cardBackgroundColor="@color/white"
 				app:cardCornerRadius="5dp"
 				app:cardElevation="4dp"
@@ -121,7 +123,7 @@
 						android:id="@+id/answer_a_label"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="@string/dummy_answer_a"
+						tools:text="@string/dummy_answer_a"
 						android:textSize="20sp"
 						app:layout_constraintBottom_toBottomOf="parent"
 						app:layout_constraintEnd_toEndOf="parent"
@@ -138,6 +140,8 @@
 				android:layout_marginTop="16dp"
 				android:layout_marginEnd="4dp"
 				android:layout_marginBottom="4dp"
+				android:clickable="true"
+				android:foreground="?android:selectableItemBackground"
 				app:cardBackgroundColor="@color/white"
 				app:cardCornerRadius="5dp"
 				app:cardElevation="4dp"
@@ -157,7 +161,7 @@
 						android:id="@+id/answer_b_label"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="@string/dummy_answer_b"
+						tools:text="@string/dummy_answer_b"
 						android:textSize="20sp"
 						app:layout_constraintBottom_toBottomOf="parent"
 						app:layout_constraintEnd_toEndOf="parent"
@@ -174,6 +178,8 @@
 				android:layout_marginTop="16dp"
 				android:layout_marginEnd="4dp"
 				android:layout_marginBottom="4dp"
+				android:clickable="true"
+				android:foreground="?android:selectableItemBackground"
 				app:cardBackgroundColor="@color/white"
 				app:cardCornerRadius="5dp"
 				app:cardElevation="4dp"
@@ -193,7 +199,7 @@
 						android:id="@+id/answer_c_label"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="@string/dummy_answer_c"
+						tools:text="@string/dummy_answer_c"
 						android:textSize="20sp"
 						app:layout_constraintBottom_toBottomOf="parent"
 						app:layout_constraintEnd_toEndOf="parent"
@@ -209,6 +215,8 @@
 				android:layout_marginStart="4dp"
 				android:layout_marginTop="16dp"
 				android:layout_marginEnd="4dp"
+				android:clickable="true"
+				android:foreground="?android:selectableItemBackground"
 				app:cardBackgroundColor="@color/white"
 				app:cardCornerRadius="5dp"
 				app:cardElevation="4dp"
@@ -228,7 +236,7 @@
 						android:id="@+id/answer_d_label"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="@string/dummy_answer_d"
+						tools:text="@string/dummy_answer_d"
 						android:textSize="20sp"
 						app:layout_constraintBottom_toBottomOf="parent"
 						app:layout_constraintEnd_toEndOf="parent"
@@ -236,6 +244,11 @@
 						app:layout_constraintTop_toTopOf="parent" />
 				</androidx.constraintlayout.widget.ConstraintLayout>
 			</androidx.cardview.widget.CardView>
+
+			<android.widget.Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/answer_d_card" />
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
