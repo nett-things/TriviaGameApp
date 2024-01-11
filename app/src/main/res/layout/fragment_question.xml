@@ -98,6 +98,85 @@
 			app:layout_constraintTop_toBottomOf="@+id/prompt_label">
 
 			<androidx.cardview.widget.CardView
+				android:id="@+id/answer_true_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="4dp"
+				android:clickable="true"
+				android:foreground="?android:selectableItemBackground"
+				app:cardBackgroundColor="@color/white"
+				app:cardCornerRadius="5dp"
+				app:cardElevation="4dp"
+				app:contentPaddingBottom="10dp"
+				app:contentPaddingLeft="5dp"
+				app:contentPaddingRight="5dp"
+				app:contentPaddingTop="10dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:visibility="gone">
+
+				<androidx.constraintlayout.widget.ConstraintLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<TextView
+						android:id="@+id/answer_true_label"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="True"
+						android:textSize="20sp"
+						app:layout_constraintBottom_toBottomOf="parent"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toTopOf="parent" />
+				</androidx.constraintlayout.widget.ConstraintLayout>
+			</androidx.cardview.widget.CardView>
+
+			<androidx.cardview.widget.CardView
+				android:id="@+id/answer_false_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="4dp"
+				android:clickable="true"
+				android:foreground="?android:selectableItemBackground"
+				app:cardBackgroundColor="@color/white"
+				app:cardCornerRadius="5dp"
+				app:cardElevation="4dp"
+				app:contentPaddingBottom="10dp"
+				app:contentPaddingLeft="5dp"
+				app:contentPaddingRight="5dp"
+				app:contentPaddingTop="10dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/answer_true_card"
+				tools:visibility="gone">
+
+				<androidx.constraintlayout.widget.ConstraintLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<TextView
+						android:id="@+id/answer_false_label"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="False"
+						android:textSize="20sp"
+						app:layout_constraintBottom_toBottomOf="parent"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toTopOf="parent" />
+				</androidx.constraintlayout.widget.ConstraintLayout>
+			</androidx.cardview.widget.CardView>
+
+			<android.widget.Space
+				android:id="@+id/answer_false_card_space"
+				android:layout_width="match_parent"
+				android:layout_height="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/answer_false_card"
+				tools:visibility="gone" />
+
+			<androidx.cardview.widget.CardView
 				android:id="@+id/answer_a_card"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -246,6 +325,7 @@
 			</androidx.cardview.widget.CardView>
 
 			<android.widget.Space
+				android:id="@+id/answer_d_card_space"
 				android:layout_width="match_parent"
 				android:layout_height="10dp"
 				app:layout_constraintTop_toBottomOf="@+id/answer_d_card" />
