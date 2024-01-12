@@ -37,8 +37,6 @@ class LoadingFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		Log.i("test", "category: ${args.category}, difficulty: ${args.difficulty}, type: ${args.type}")
-
 		populateQuestions()
 	}
 
