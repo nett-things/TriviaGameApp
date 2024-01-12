@@ -32,11 +32,11 @@ data class Question(
 	val incorrectAnswers: List<String>
 ): Parcelable {
 	enum class Type {
-		MULTIPLE, BOOLEAN
+		ANY, MULTIPLE, BOOLEAN
 	}
 
 	enum class Difficulty {
-		EASY, MEDIUM, HARD
+		ANY, EASY, MEDIUM, HARD
 	}
 }
 
@@ -51,6 +51,7 @@ class QuestionTypeAdapter {
 		return when(type) {
 			Question.Type.MULTIPLE -> "multiple"
 			Question.Type.BOOLEAN -> "boolean"
+			else -> "multiple"
 		}
 	}
 
@@ -76,6 +77,7 @@ class QuestionDifficultyAdapter {
 			Question.Difficulty.EASY -> "easy"
 			Question.Difficulty.MEDIUM -> "medium"
 			Question.Difficulty.HARD -> "hard"
+			else -> "easy"
 		}
 	}
 

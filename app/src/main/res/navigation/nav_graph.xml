@@ -31,6 +31,15 @@
 		<action
 			android:id="@+id/action_loadingFragment_to_questionFragment"
 			app:destination="@id/questionFragment" />
+		<argument
+			android:name="category"
+			app:argType="integer" />
+		<argument
+			android:name="difficulty"
+			app:argType="com.net3hings.triviagameapp.question.Question$Difficulty" />
+		<argument
+			android:name="type"
+			app:argType="com.net3hings.triviagameapp.question.Question$Type" />
 	</fragment>
 	<fragment
 		android:id="@+id/setupFragment"

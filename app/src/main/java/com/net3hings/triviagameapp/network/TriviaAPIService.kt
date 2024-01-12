@@ -11,8 +11,8 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://opentdb.com/"
-private const val QUESTIONS_ENDPOINT = "api.php?amount=100"
-//private const val QUERY_ENDPOINT = "map_service.html"
+private const val QUESTIONS_ENDPOINT = "api.php?amount=50"
+private const val QUERY_ENDPOINT = "api.php"
 
 private val moshi = Moshi.Builder()
 	.add(QuestionTypeAdapter())
@@ -29,13 +29,20 @@ interface TriviaAPIService {
 	@GET(QUESTIONS_ENDPOINT)
 	suspend fun getQuestions(): Questions
 
-//	@GET(QUERY_ENDPOINT)
-//	suspend fun getQuestions(
-//		@Query("mtype")
-//		mType: String,
-//		@Query("co")
-//		co: String
-//	): Questions
+	@GET(QUERY_ENDPOINT)
+	suspend fun getQuestions(
+		@Query("amount")
+		amount: String,
+
+		@Query("category")
+		category: String,
+
+		@Query("difficulty")
+		difficulty: String,
+
+		@Query("type")
+		type: String
+	): Questions
 }
 
 object TriviaAPI {

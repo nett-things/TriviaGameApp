@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.net3hings.triviagameapp.databinding.FragmentSetupBinding
+import com.net3hings.triviagameapp.question.Question
 
 class SetupFragment : Fragment() {
 	private lateinit var binding: FragmentSetupBinding
@@ -24,7 +25,16 @@ class SetupFragment : Fragment() {
 		super.onViewCreated(view, savedInstanceState)
 
 		binding.startGameButton.setOnClickListener {
-			findNavController().navigate(SetupFragmentDirections.actionSetupFragmentToLoadingFragment())
+			findNavController().navigate(SetupFragmentDirections
+				.actionSetupFragmentToLoadingFragment(
+					when(binding.categorySpinner.selectedItemPosition) {
+						0 -> 0
+						else -> binding.categorySpinner.selectedItemPosition + 8
+					},
+					Question.Difficulty.entries[binding.difficultySpinner.selectedItemPosition],
+					Question.Type.entries[binding.typeSpinner.selectedItemPosition]
+				)
+			)
 		}
 	}
 }

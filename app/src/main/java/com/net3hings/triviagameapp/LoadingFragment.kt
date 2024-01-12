@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.net3hings.triviagameapp.databinding.FragmentLoadingBinding
 import com.net3hings.triviagameapp.network.TriviaAPI
@@ -20,6 +21,7 @@ import kotlinx.coroutines.withContext
 
 class LoadingFragment : Fragment() {
 	private lateinit var binding: FragmentLoadingBinding
+	private val args: LoadingFragmentArgs by navArgs()
 
 	private var questions: ArrayList<Question>? = null
 
@@ -35,6 +37,8 @@ class LoadingFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
+		Log.i("test", "category: ${args.category}, difficulty: ${args.difficulty}, type: ${args.type}")
+
 		populateQuestions()
 	}
 
@@ -44,7 +48,12 @@ class LoadingFragment : Fragment() {
 			try {
 				questions = GlobalScope.async {
 					withContext(Dispatchers.IO) {
-						ArrayList(TriviaAPI.retrofitService.getQuestions().items)
+						ArrayList(TriviaAPI.retrofitService.getQuestions(
+							amount = "50",
+							category = args.category.toString(),
+							difficulty = resolveDifficulty(args.difficulty),
+							type = resolveType(args.type)
+						).items)
 					}
 				}.await()
 
@@ -60,6 +69,23 @@ class LoadingFragment : Fragment() {
 					findNavController().popBackStack()
 				}
 			}
+		}
+	}
+
+	private fun resolveDifficulty(difficulty: Question.Difficulty): String {
+		return when(difficulty) {
+			Question.Difficulty.ANY -> "0"
+			Question.Difficulty.EASY -> "easy"
+			Question.Difficulty.MEDIUM -> "medium"
+			Question.Difficulty.HARD -> "hard"
+		}
+	}
+
+	private fun resolveType(type: Question.Type): String {
+		return when(type) {
+			Question.Type.ANY -> "0"
+			Question.Type.MULTIPLE -> "multiple"
+			Question.Type.BOOLEAN -> "boolean"
 		}
 	}
 }
