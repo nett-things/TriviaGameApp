@@ -22,6 +22,11 @@
 	<string name="true_answer_text">True</string>
 	<string name="false_answer_text">False</string>
 	<string name="number_of_questions_label_text">Number of questions: %d</string>
+	<string name="title_label_tet">Trivia\nGame</string>
+	<string name="play_button_text">Play</string>
+	<string name="statistics_button_text">Statistics</string>
+	<string name="settings_button_text">Settings</string>
+	<string name="quit_button_text">Quit</string>
 	<string-array name="category_array">
 		<item>Any Category</item>
 		<item>General Knowledge</item>
