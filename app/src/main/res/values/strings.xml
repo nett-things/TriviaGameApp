@@ -27,6 +27,10 @@
 	<string name="statistics_button_text">Statistics</string>
 	<string name="settings_button_text">Settings</string>
 	<string name="quit_button_text">Quit</string>
+	<string name="endgame_label_text">Endgame!</string>
+	<string name="result_label_text">You\'ve answered %d questions\ncorrectly out of %d</string>
+	<string name="retry_button_text">Retry</string>
+	<string name="back_to_menu_button_text">Back to menu</string>
 	<string-array name="category_array">
 		<item>Any Category</item>
 		<item>General Knowledge</item>
