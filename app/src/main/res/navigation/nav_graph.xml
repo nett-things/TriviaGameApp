@@ -22,6 +22,9 @@
 		<argument
 			android:name="questions"
 			app:argType="com.net3hings.triviagameapp.question.Question[]" />
+		<action
+			android:id="@+id/action_questionFragment_to_endgameFragment"
+			app:destination="@id/endgameFragment" />
 	</fragment>
 	<fragment
 		android:id="@+id/loadingFragment"
@@ -52,5 +55,17 @@
 		<action
 			android:id="@+id/action_setupFragment_to_loadingFragment"
 			app:destination="@id/loadingFragment" />
+	</fragment>
+	<fragment
+		android:id="@+id/endgameFragment"
+		android:name="com.net3hings.triviagameapp.EndgameFragment"
+		android:label="fragment_endgame"
+		tools:layout="@layout/fragment_endgame" >
+		<argument
+			android:name="numOfQuestions"
+			app:argType="integer" />
+		<argument
+			android:name="numOfCorrectQuestions"
+			app:argType="integer" />
 	</fragment>
 </navigation>
