@@ -23,8 +23,15 @@ class MenuFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		binding.startGameButton.setOnClickListener {
+		binding.playButton.setOnClickListener {
 			findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToSetupFragment())
+		}
+
+		binding.statisticsButton.setOnClickListener { }
+		binding.settingsButton.setOnClickListener { }
+
+		binding.quitButton.setOnClickListener {
+			activity?.finishAndRemoveTask()
 		}
 	}
 }
