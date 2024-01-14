@@ -65,7 +65,7 @@
 			android:name="numOfQuestions"
 			app:argType="integer" />
 		<argument
-			android:name="numOfCorrectQuestions"
+			android:name="correctAnswers"
 			app:argType="integer" />
 	</fragment>
 </navigation>

@@ -20,6 +20,7 @@ class QuestionFragment : Fragment() {
 	private val args: QuestionFragmentArgs by navArgs()
 
 	private var currentQuestion: Int = 0
+	private var correctAnswers: Int = 0
 	private var score: Int = 0
 	private var waitForClick: Boolean = false
 
@@ -79,12 +80,24 @@ class QuestionFragment : Fragment() {
 	}
 
 	private fun nextQuestion() {
-		currentQuestion++
+		if(args.questions.size > currentQuestion + 1) {
+			currentQuestion++
 
-		resetAnswers()
+			resetAnswers()
 
-		prepareAnswer()
-		displayTrivia()
+			prepareAnswer()
+			displayTrivia()
+
+		} else {
+			finishGame()
+		}
+	}
+
+	private fun finishGame() {
+		findNavController().navigate(QuestionFragmentDirections.actionQuestionFragmentToEndgameFragment(
+			args.questions.size,
+			correctAnswers
+		))
 	}
 
 	private fun prepareAnswer() {
@@ -215,12 +228,13 @@ class QuestionFragment : Fragment() {
 		binding.answerTrueCard.isClickable = false
 		binding.answerFalseCard.isClickable = false
 
-		// update the prompt
-		binding.promptLabel.text =
-			if(buttonClicked == answer)
-				getString(R.string.correct_answer_msg)
-			else
-				getString(R.string.wrong_answer_msg)
+		// update the prompt and correct answers count
+		if(buttonClicked == answer) {
+			binding.promptLabel.text = getString(R.string.correct_answer_msg)
+			correctAnswers++
+
+		} else
+			binding.promptLabel.text = getString(R.string.wrong_answer_msg)
 
 		// wait for click on screen to advance
 		waitForClick = true
