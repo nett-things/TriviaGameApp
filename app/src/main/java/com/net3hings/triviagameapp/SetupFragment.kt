@@ -25,11 +25,11 @@ class SetupFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		binding.numOfQuestionsLabel.text = getString(R.string.number_of_questions_label_text, binding.numberOfQuestionsSeekbar.progress)
+		binding.numOfQuestionsLabel.text = getString(R.string.number_of_questions_label_text, binding.numberOfQuestionsSeekbar.progress * 5)
 
 		binding.numberOfQuestionsSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 			override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-				binding.numOfQuestionsLabel.text = getString(R.string.number_of_questions_label_text, progress)
+				binding.numOfQuestionsLabel.text = getString(R.string.number_of_questions_label_text, progress * 5)
 			}
 
 			override fun onStartTrackingTouch(seekBar: SeekBar) { }
@@ -39,7 +39,7 @@ class SetupFragment : Fragment() {
 		binding.startGameButton.setOnClickListener {
 			findNavController().navigate(SetupFragmentDirections
 				.actionSetupFragmentToLoadingFragment(
-					binding.numberOfQuestionsSeekbar.progress,
+					binding.numberOfQuestionsSeekbar.progress * 5,
 					when(binding.categorySpinner.selectedItemPosition) {
 						0 -> 0
 						else -> binding.categorySpinner.selectedItemPosition + 8
