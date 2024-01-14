@@ -1,5 +1,5 @@
 <resources>
-	<string name="app_name">TriviaGameApp</string>
+	<string name="app_name">Trivia Game</string>
 	<string name="current_score_text">Current score: %d</string>
 	<string name="question_label_text">Question %d out of %d</string>
 	<string name="dummy_question">Lake Titicaca is located between which two nations?</string>
