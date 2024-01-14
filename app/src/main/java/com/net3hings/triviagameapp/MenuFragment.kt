@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.net3hings.triviagameapp.databinding.FragmentMenuBinding
 
@@ -22,6 +23,13 @@ class MenuFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		// set up the listener for handling the go back button
+		requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+			override fun handleOnBackPressed() {
+				activity?.finishAndRemoveTask()
+			}
+		})
 
 		binding.playButton.setOnClickListener {
 			findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToSetupFragment())

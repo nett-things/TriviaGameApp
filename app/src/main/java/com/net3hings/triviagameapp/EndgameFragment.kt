@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.net3hings.triviagameapp.databinding.FragmentEndgameBinding
 
@@ -24,6 +26,14 @@ class EndgameFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
+		// set up the listener for handling the go back button
+		requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+			override fun handleOnBackPressed() {
+				findNavController().popBackStack(R.id.setupFragment, false)
+			}
+		})
+
+		// display the result
 		binding.resultLabel.text = getString(R.string.result_label_text, args.correctAnswers, args.numOfQuestions)
 	}
 }

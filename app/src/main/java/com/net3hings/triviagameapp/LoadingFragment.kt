@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
@@ -36,6 +37,13 @@ class LoadingFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		// set up the listener for handling the go back button
+		requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+			override fun handleOnBackPressed() {
+				// no action
+			}
+		})
 
 		populateQuestions()
 	}

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.net3hings.triviagameapp.databinding.FragmentSetupBinding
 import com.net3hings.triviagameapp.question.Question
@@ -24,6 +25,13 @@ class SetupFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		// set up the listener for handling the go back button
+		requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+			override fun handleOnBackPressed() {
+				findNavController().popBackStack(R.id.menuFragment, false)
+			}
+		})
 
 		binding.numOfQuestionsLabel.text = getString(R.string.number_of_questions_label_text, binding.numberOfQuestionsSeekbar.progress * 5)
 
