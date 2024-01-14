@@ -47,7 +47,7 @@ class LoadingFragment : Fragment() {
 				questions = GlobalScope.async {
 					withContext(Dispatchers.IO) {
 						ArrayList(TriviaAPI.retrofitService.getQuestions(
-							amount = "50",
+							amount = args.numOfQuestions.toString(),
 							category = args.category.toString(),
 							difficulty = resolveDifficulty(args.difficulty),
 							type = resolveType(args.type)

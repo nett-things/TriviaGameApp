@@ -32,6 +32,9 @@
 			android:id="@+id/action_loadingFragment_to_questionFragment"
 			app:destination="@id/questionFragment" />
 		<argument
+			android:name="numOfQuestions"
+			app:argType="integer" />
+		<argument
 			android:name="category"
 			app:argType="integer" />
 		<argument
