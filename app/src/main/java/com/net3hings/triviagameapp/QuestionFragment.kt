@@ -109,7 +109,7 @@ class QuestionFragment : Fragment() {
 	private fun displayTrivia() {
 		binding.scoreLabel.text = getString(R.string.current_score_text, score)
 
-		binding.questionLabel.text = getString(R.string.question_label_text, currentQuestion + 1)
+		binding.questionLabel.text = getString(R.string.question_label_text, currentQuestion + 1, args.questions.size)
 		binding.questionContentLabel.text =
 			Html.fromHtml(args.questions[currentQuestion].question, Html.FROM_HTML_MODE_COMPACT).toString()
 
