@@ -20,6 +20,18 @@
 		android:label="fragment_question"
 		tools:layout="@layout/fragment_question" >
 		<argument
+			android:name="numOfQuestions"
+			app:argType="integer" />
+		<argument
+			android:name="category"
+			app:argType="integer" />
+		<argument
+			android:name="difficulty"
+			app:argType="integer" />
+		<argument
+			android:name="type"
+			app:argType="integer" />
+		<argument
 			android:name="questions"
 			app:argType="com.net3hings.triviagameapp.question.Question[]" />
 		<action

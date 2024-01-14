@@ -10,14 +10,22 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.net3hings.triviagameapp.database.StatisticsViewModel
 import com.net3hings.triviagameapp.databinding.FragmentQuestionBinding
 import com.net3hings.triviagameapp.question.Question
 
 class QuestionFragment : Fragment() {
 	private lateinit var binding: FragmentQuestionBinding
 	private val args: QuestionFragmentArgs by navArgs()
+
+	private val viewModel: StatisticsViewModel by activityViewModels {
+		StatisticsViewModel.StatisticsViewModelFactory(
+			(activity?.application as TriviaGameApplication).repository
+		)
+	}
 
 	private var currentQuestion: Int = 0
 	private var correctAnswers: Int = 0
@@ -94,8 +102,18 @@ class QuestionFragment : Fragment() {
 	}
 
 	private fun finishGame() {
+		viewModel.addItem(
+			args.numOfQuestions,
+			args.category,
+			args.difficulty,
+			args.type,
+			correctAnswers,
+			score,
+			0
+		)
+
 		findNavController().navigate(QuestionFragmentDirections.actionQuestionFragmentToEndgameFragment(
-			args.questions.size,
+			args.numOfQuestions,
 			correctAnswers
 		))
 	}
