@@ -12,23 +12,19 @@ class MainActivity : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
-		val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-		when(preferences.getString("ui_preference", "light_mode")) {
-			"light_mode" -> setThemeMode(AppCompatDelegate.MODE_NIGHT_NO)
-			"dark_mode" -> setThemeMode(AppCompatDelegate.MODE_NIGHT_YES)
-			"device_settings" -> setThemeMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-		}
+		setThemeMode()
 
 		binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 	}
 
-	fun setThemeMode(theme: Int) {
-		when(theme) {
-			AppCompatDelegate.MODE_NIGHT_NO -> AppCompatDelegate.setDefaultNightMode(theme)
-			AppCompatDelegate.MODE_NIGHT_YES -> AppCompatDelegate.setDefaultNightMode(theme)
-			AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> AppCompatDelegate.setDefaultNightMode(theme)
-			else -> {}
+	fun setThemeMode() {
+		val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+		when(preferences.getString("ui_preference", "light_mode")) {
+			"light_mode" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+			"dark_mode" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+			"device_settings" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 		}
 	}
 }
