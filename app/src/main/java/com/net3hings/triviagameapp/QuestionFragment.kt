@@ -118,7 +118,8 @@ class QuestionFragment : Fragment() {
 
 		findNavController().navigate(QuestionFragmentDirections.actionQuestionFragmentToEndgameFragment(
 			args.numOfQuestions,
-			correctAnswers
+			correctAnswers,
+			score
 		))
 	}
 

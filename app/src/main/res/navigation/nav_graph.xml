@@ -85,6 +85,9 @@
 		<argument
 			android:name="correctAnswers"
 			app:argType="integer" />
+		<argument
+			android:name="score"
+			app:argType="integer" />
 	</fragment>
 	<fragment
 		android:id="@+id/statisticsFragment"

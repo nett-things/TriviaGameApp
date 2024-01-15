@@ -28,7 +28,7 @@
 	<string name="settings_button_text">Settings</string>
 	<string name="quit_button_text">Quit</string>
 	<string name="endgame_label_text">Endgame!</string>
-	<string name="result_label_text">You\'ve answered %d questions\ncorrectly out of %d</string>
+	<string name="result_label_text">You\'ve answered %d questions\ncorrectly out of %d\n\nFinal score: %d</string>
 	<string name="retry_button_text">Retry</string>
 	<string name="back_to_menu_button_text">Back to menu</string>
 	<string name="most_played_category_label_text">Most played category: %s</string>
