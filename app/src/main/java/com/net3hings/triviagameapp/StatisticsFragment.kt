@@ -57,21 +57,36 @@ class StatisticsFragment : Fragment() {
 	}
 
 	private fun calculateData() {
-		val categories = items?.map { it.category }
-		mostPlayedCategory = categories?.groupingBy { it }?.eachCount()?.maxBy { it.value }?.key!!
+		if(items != null) {
+			val categories = items?.map { it.category }
+			mostPlayedCategory = categories?.groupingBy { it }?.eachCount()?.maxBy { it.value }?.key!!
 
-		avgCorrectAnswers = items?.sumOf { it.correctAnswers }!!.toDouble()/items?.sumOf { it.questions }!!
+			avgCorrectAnswers = items?.sumOf { it.correctAnswers }!!.toDouble() / items?.sumOf { it.questions }!!
 
-		avgScore = items?.map { it.score }!!.average()
+			avgScore = items?.map { it.score }!!.average()
 
-		avgAnswerTime = items?.sumOf { it.duration }!!.toDouble()/items?.sumOf { it.questions }!!
+			avgAnswerTime = items?.sumOf { it.duration }!!.toDouble() / items?.sumOf { it.questions }!!
+		}
 	}
 
 	private fun displayData() {
-		binding.mostPlayedCategoryLabel.text = getString(R.string.most_played_category_label_text, resolveCategory(mostPlayedCategory))
-		binding.averageCorrectAnswersLabel.text = getString(R.string.average_correct_answers_label_text, avgCorrectAnswers)
-		binding.averageScoreLabel.text = getString(R.string.average_score_label_text, avgScore)
-		binding.averageAnswerTimeLabel.text = getString(R.string.average_answer_time_label_text, avgAnswerTime)
+		if(items != null) {
+			binding.mostPlayedCategoryLabel.text = getString(
+				R.string.most_played_category_label_text,
+				resolveCategory(mostPlayedCategory)
+			)
+			binding.averageCorrectAnswersLabel.text = getString(R.string.average_correct_answers_label_text, avgCorrectAnswers)
+			binding.averageScoreLabel.text = getString(R.string.average_score_label_text, avgScore)
+			binding.averageAnswerTimeLabel.text = getString(R.string.average_answer_time_label_text, avgAnswerTime)
+
+		} else {
+			binding.mostPlayedCategoryLabel.visibility = View.INVISIBLE
+			binding.averageCorrectAnswersLabel.visibility = View.INVISIBLE
+			binding.averageScoreLabel.visibility = View.INVISIBLE
+			binding.averageAnswerTimeLabel.visibility = View.INVISIBLE
+
+			binding.noDataLabel.visibility = View.VISIBLE
+		}
 	}
 
 	private fun resolveCategory(category: Int): String {
