@@ -3,15 +3,15 @@
 	xmlns:android="http://schemas.android.com/apk/res/android">
 	<ListPreference
 		app:defaultValue="1"
-		android:entries="@array/light_dark_ui_array"
-		android:entryValues="@array/light_dark_ui_values"
-		android:key="ui_preference"
-		android:title="User interface theme"
+		app:entries="@array/light_dark_ui_array"
+		app:entryValues="@array/light_dark_ui_values"
+		app:key="ui_preference"
+		app:title="User interface theme"
 		app:summary="Choose the app's theme" />
 	<SwitchPreference
-		android:defaultValue="false"
-		android:key="lights_out_preference"
-		android:title="Enable lights out"
+		app:defaultValue="false"
+		app:key="lights_out_preference"
+		app:title="Enable lights out"
 		app:enabled="false" />
 	<Preference
 		app:title="Clear statistics"
