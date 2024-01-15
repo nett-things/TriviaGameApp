@@ -35,4 +35,5 @@
 	<string name="average_correct_answers_label_text">Average correct answers: %.2f%%</string>
 	<string name="average_score_label_text">Average score: %.2f</string>
 	<string name="average_answer_time_label_text">Average answer time: %.2fs</string>
+	<string name="no_data_label_text">Play at least one game to see your gameplay statistics!</string>
 </resources>
