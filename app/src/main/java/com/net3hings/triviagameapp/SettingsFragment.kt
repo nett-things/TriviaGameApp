@@ -44,23 +44,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
 		uiPreference?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
 			when(newValue.toString()) {
-				"light_mode" -> {
-					(activity as MainActivity?)?.setThemeMode()
-					lightsOutPreference?.isEnabled = false
-				}
+				"dark_mode", "device_settings" -> lightsOutPreference?.isEnabled = true
 
-				"dark_mode" -> {
-					(activity as MainActivity?)?.setThemeMode()
-					lightsOutPreference?.isEnabled = true
-				}
-
-				"device_settings" -> {
-					(activity as MainActivity?)?.setThemeMode()
-					lightsOutPreference?.isEnabled = true
-				}
-
-				else -> {}
+				else -> lightsOutPreference?.isEnabled = false // light_mode
 			}
+
+			(activity as MainActivity?)?.setThemeMode()
 
 			true
 		}
