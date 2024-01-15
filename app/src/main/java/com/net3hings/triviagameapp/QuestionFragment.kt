@@ -31,6 +31,8 @@ class QuestionFragment : Fragment() {
 	private var correctAnswers: Int = 0
 	private var score: Int = 0
 	private var waitForClick: Boolean = false
+	private var startTimeCount: Long = 0
+	private var timeElapsed: Long = 0
 
 	private enum class Answer {
 		A, B, C, D, TRUE, FALSE
@@ -64,8 +66,7 @@ class QuestionFragment : Fragment() {
 		})
 
 		// prepare the game
-		prepareAnswer()
-		displayTrivia()
+		nextQuestion(initial = true)
 
 		// set up the listeners for the answer buttons
 		binding.answerACard.setOnClickListener { resolveAnswer(Answer.A) }
@@ -87,14 +88,17 @@ class QuestionFragment : Fragment() {
 		}
 	}
 
-	private fun nextQuestion() {
+	private fun nextQuestion(initial: Boolean = false) {
 		if(args.questions.size > currentQuestion + 1) {
-			currentQuestion++
-
-			resetAnswers()
+			if(!initial) {
+				currentQuestion++
+				resetAnswers()
+			}
 
 			prepareAnswer()
 			displayTrivia()
+
+			startTimeCount = System.currentTimeMillis()
 
 		} else {
 			finishGame()
@@ -109,7 +113,7 @@ class QuestionFragment : Fragment() {
 			args.type,
 			correctAnswers,
 			score,
-			0
+			timeElapsed
 		)
 
 		findNavController().navigate(QuestionFragmentDirections.actionQuestionFragmentToEndgameFragment(
@@ -220,6 +224,9 @@ class QuestionFragment : Fragment() {
 	}
 
 	private fun resolveAnswer(buttonClicked: Answer) {
+		// calculate elapsed time
+		timeElapsed += System.currentTimeMillis() - startTimeCount
+
 		// mark all wrong
 		binding.answerACard.setCardBackgroundColor(requireContext().getColor(R.color.red))
 		binding.answerBCard.setCardBackgroundColor(requireContext().getColor(R.color.red))

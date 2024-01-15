@@ -28,5 +28,5 @@ data class StatisticsItem(
 	val score: Int,
 
 	@ColumnInfo(name = "duration")
-	val duration: Int
+	val duration: Long
 )

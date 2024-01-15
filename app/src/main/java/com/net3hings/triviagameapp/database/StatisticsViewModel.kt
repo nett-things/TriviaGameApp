@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 class StatisticsViewModel(private val statisticsRepository: StatisticsRepository) : ViewModel() {
 	val allItems: LiveData<List<StatisticsItem>> = statisticsRepository.allItems.asLiveData()
 
-	fun addItem(itemQuestions: Int, itemCategory: Int, itemDifficulty: Int, itemType: Int, itemCorrectAnswers: Int, itemScore: Int, itemDuration: Int) = viewModelScope.launch {
+	fun addItem(itemQuestions: Int, itemCategory: Int, itemDifficulty: Int, itemType: Int, itemCorrectAnswers: Int, itemScore: Int, itemDuration: Long) = viewModelScope.launch {
 		statisticsRepository.insert(
 			StatisticsItem(
 				questions = itemQuestions,
