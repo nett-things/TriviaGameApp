@@ -8,7 +8,7 @@
 	<string name="dummy_answer_b">Kenya and Uganda</string>
 	<string name="dummy_answer_c">Mexico and the United States</string>
 	<string name="dummy_answer_d">India and Bangladesh</string>
-	<string name="correct_answer_msg">Correct answer!</string>
+	<string name="correct_answer_msg">Correct answer! +%d pts</string>
 	<string name="wrong_answer_msg">Wrong answer!</string>
 	<string name="loading_msg">Loading the trivia questions…</string>
 	<string name="cannot_load_msg">Couldn\'t load. Try again.</string>
@@ -28,7 +28,7 @@
 	<string name="settings_button_text">Settings</string>
 	<string name="quit_button_text">Quit</string>
 	<string name="endgame_label_text">Endgame!</string>
-	<string name="result_label_text">You\'ve answered %d questions\ncorrectly out of %d</string>
+	<string name="result_label_text">You\'ve answered %d questions\ncorrectly out of %d\n\nFinal score: %d</string>
 	<string name="retry_button_text">Retry</string>
 	<string name="back_to_menu_button_text">Back to menu</string>
 	<string name="most_played_category_label_text">Most played category: %s</string>

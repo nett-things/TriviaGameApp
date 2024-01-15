@@ -34,7 +34,7 @@ class EndgameFragment : Fragment() {
 		})
 
 		// display the result
-		binding.resultLabel.text = getString(R.string.result_label_text, args.correctAnswers, args.numOfQuestions)
+		binding.resultLabel.text = getString(R.string.result_label_text, args.correctAnswers, args.numOfQuestions, args.score)
 
 		// set up the listener for the retry button
 		binding.retryButton.setOnClickListener {
