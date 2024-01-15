@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".StatisticsFragment">
+	tools:context=".StatisticsFragment" >
 
-	<!-- TODO: Update blank fragment layout -->
 	<TextView
+		android:id="@+id/most_played_category_label"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:text="@string/hello_blank_fragment" />
+		android:layout_height="wrap_content"
+		android:layout_marginStart="24dp"
+		android:layout_marginTop="24dp"
+		android:text="@string/most_played_category_label_text"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+	<TextView
+		android:id="@+id/average_correct_answers_label"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="24dp"
+		android:layout_marginTop="24dp"
+		android:text="@string/average_correct_answers_label_text"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/most_played_category_label" />
+
+	<TextView
+		android:id="@+id/average_score_label"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="24dp"
+		android:layout_marginTop="24dp"
+		android:text="@string/average_score_label_text"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/average_correct_answers_label" />
+
+	<TextView
+		android:id="@+id/average_answer_time_label"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="24dp"
+		android:layout_marginTop="24dp"
+		android:text="@string/average_answer_time_label_text"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/average_score_label" />
+</androidx.constraintlayout.widget.ConstraintLayout>
