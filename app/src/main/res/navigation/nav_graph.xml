@@ -13,6 +13,9 @@
 		<action
 			android:id="@+id/action_menuFragment_to_setupFragment"
 			app:destination="@id/setupFragment" />
+		<action
+			android:id="@+id/action_menuFragment_to_statisticsFragment"
+			app:destination="@id/statisticsFragment" />
 	</fragment>
 	<fragment
 		android:id="@+id/questionFragment"
@@ -80,4 +83,9 @@
 			android:name="correctAnswers"
 			app:argType="integer" />
 	</fragment>
+	<fragment
+		android:id="@+id/statisticsFragment"
+		android:name="com.net3hings.triviagameapp.StatisticsFragment"
+		android:label="fragment_statistics"
+		tools:layout="@layout/fragment_statistics" />
 </navigation>

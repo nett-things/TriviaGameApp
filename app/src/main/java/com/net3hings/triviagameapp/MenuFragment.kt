@@ -35,7 +35,10 @@ class MenuFragment : Fragment() {
 			findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToSetupFragment())
 		}
 
-		binding.statisticsButton.setOnClickListener { }
+		binding.statisticsButton.setOnClickListener {
+			findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToStatisticsFragment())
+		}
+
 		binding.settingsButton.setOnClickListener { }
 
 		binding.quitButton.setOnClickListener {
