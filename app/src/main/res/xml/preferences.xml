@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:android="http://schemas.android.com/apk/res/android">
 	<ListPreference
-		app:defaultValue="1"
+		app:defaultValue="light_mode"
 		app:entries="@array/light_dark_ui_array"
 		app:entryValues="@array/light_dark_ui_values"
 		app:key="ui_preference"

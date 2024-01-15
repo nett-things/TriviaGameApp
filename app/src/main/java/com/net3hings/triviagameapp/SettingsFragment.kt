@@ -36,9 +36,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 		val uiPreference: Preference? = findPreference("ui_preference")
 		uiPreference?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
 			when(newValue.toString()) {
-				"1" -> (activity as MainActivity?)?.setThemeMode(AppCompatDelegate.MODE_NIGHT_NO)
-				"2" -> (activity as MainActivity?)?.setThemeMode(AppCompatDelegate.MODE_NIGHT_YES)
-				"3" -> (activity as MainActivity?)?.setThemeMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+				"light_mode" -> (activity as MainActivity?)?.setThemeMode(AppCompatDelegate.MODE_NIGHT_NO)
+				"dark_mode" -> (activity as MainActivity?)?.setThemeMode(AppCompatDelegate.MODE_NIGHT_YES)
+				"device_settings" -> (activity as MainActivity?)?.setThemeMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 				else -> {}
 			}
 
