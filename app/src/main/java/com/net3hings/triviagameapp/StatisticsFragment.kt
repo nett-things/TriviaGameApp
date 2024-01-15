@@ -73,7 +73,7 @@ class StatisticsFragment : Fragment() {
 		if(items != null && items!!.isNotEmpty()) {
 			binding.mostPlayedCategoryLabel.text = getString(
 				R.string.most_played_category_label_text,
-				resolveCategory(mostPlayedCategory)
+				Helper.resolveCategory(mostPlayedCategory)
 			)
 			binding.averageCorrectAnswersLabel.text = getString(R.string.average_correct_answers_label_text, avgCorrectAnswers)
 			binding.averageScoreLabel.text = getString(R.string.average_score_label_text, avgScore)
@@ -86,37 +86,6 @@ class StatisticsFragment : Fragment() {
 			binding.averageAnswerTimeLabel.visibility = View.INVISIBLE
 
 			binding.noDataLabel.visibility = View.VISIBLE
-		}
-	}
-
-	private fun resolveCategory(category: Int): String {
-		return when(category) {
-			0 -> "Any Category"
-			9 -> "General Knowledge"
-			10 -> "Entertainment: Books"
-			11 -> "Entertainment: Film"
-			12 -> "Entertainment: Music"
-			13 -> "Entertainment: Musicals &amp; Theatres"
-			14 -> "Entertainment: Television"
-			15 -> "Entertainment: Video Games"
-			16 -> "Entertainment: Board Games"
-			17 -> "Science &amp; Nature"
-			18 -> "Science: Computers"
-			19 -> "Science: Mathematics"
-			20 -> "Mythology"
-			21 -> "Sports"
-			22 -> "Geography"
-			23 -> "History"
-			24 -> "Politics"
-			25 -> "Art"
-			26 -> "Celebrities"
-			27 -> "Animals"
-			28 -> "Vehicles"
-			29 -> "Entertainment: Comics"
-			30 -> "Science: Gadgets"
-			31 -> "Entertainment: Japanese Anime &amp; Manga"
-			32 -> "Entertainment: Cartoon &amp; Animations"
-			else -> "Unknown"
 		}
 	}
 }

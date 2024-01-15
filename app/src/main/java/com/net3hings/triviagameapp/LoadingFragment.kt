@@ -57,8 +57,8 @@ class LoadingFragment : Fragment() {
 						ArrayList(TriviaAPI.retrofitService.getQuestions(
 							amount = args.numOfQuestions.toString(),
 							category = args.category.toString(),
-							difficulty = resolveDifficulty(args.difficulty),
-							type = resolveType(args.type)
+							difficulty = Helper.resolveDifficulty(args.difficulty),
+							type = Helper.resolveType(args.type)
 						).items)
 					}
 				}.await()
@@ -77,23 +77,6 @@ class LoadingFragment : Fragment() {
 					findNavController().popBackStack()
 				}
 			}
-		}
-	}
-
-	private fun resolveDifficulty(difficulty: Question.Difficulty): String {
-		return when(difficulty) {
-			Question.Difficulty.ANY -> "0"
-			Question.Difficulty.EASY -> "easy"
-			Question.Difficulty.MEDIUM -> "medium"
-			Question.Difficulty.HARD -> "hard"
-		}
-	}
-
-	private fun resolveType(type: Question.Type): String {
-		return when(type) {
-			Question.Type.ANY -> "0"
-			Question.Type.MULTIPLE -> "multiple"
-			Question.Type.BOOLEAN -> "boolean"
 		}
 	}
 }
