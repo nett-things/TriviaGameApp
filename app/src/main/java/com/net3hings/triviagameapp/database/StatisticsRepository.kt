@@ -12,7 +12,7 @@ class StatisticsRepository(private val statisticsDAO: StatisticsDAO) {
 	}
 
 	@WorkerThread
-	fun clearAll() {
+	suspend fun clearAll() {
 		statisticsDAO.clearAll()
 	}
 }

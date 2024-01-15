@@ -17,5 +17,5 @@ interface StatisticsDAO {
 	fun getItems(): Flow<List<StatisticsItem>>
 
 	@Query("DELETE FROM statistics")
-	fun clearAll()
+	suspend fun clearAll()
 }

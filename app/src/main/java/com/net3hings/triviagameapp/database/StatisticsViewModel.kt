@@ -24,6 +24,10 @@ class StatisticsViewModel(private val statisticsRepository: StatisticsRepository
 		)
 	}
 
+	fun clearAll() = viewModelScope.launch {
+		statisticsRepository.clearAll()
+	}
+
 	class StatisticsViewModelFactory(private val statisticsRepository: StatisticsRepository) : ViewModelProvider.Factory {
 		override fun <T : ViewModel> create(modelClass: Class<T>): T {
 			if(modelClass.isAssignableFrom(StatisticsViewModel::class.java)) {
