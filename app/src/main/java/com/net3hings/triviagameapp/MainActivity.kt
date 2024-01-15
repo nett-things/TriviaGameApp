@@ -12,16 +12,15 @@ class MainActivity : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
-		setThemeMode()
+		val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+		setThemeMode(preferences.getString("ui_preference", "light_mode")!!)
 
 		binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 	}
 
-	fun setThemeMode() {
-		val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-
-		when(preferences.getString("ui_preference", "light_mode")) {
+	fun setThemeMode(mode: String) {
+		when(mode) {
 			"light_mode" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 			"dark_mode" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 			"device_settings" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
