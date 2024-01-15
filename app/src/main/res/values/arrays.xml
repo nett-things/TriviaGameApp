@@ -37,4 +37,17 @@
 		<item>Multiple Choice</item>
 		<item>True / False</item>
 	</string-array>
+
+	<!-- Light/Dark Preference -->
+	<string-array name="light_dark_ui_array">
+		<item>Light mode</item>
+		<item>Dark mode</item>
+		<item>Use device settings</item>
+	</string-array>
+
+	<string-array name="light_dark_ui_values">
+		<item>light_mode</item>
+		<item>dark_mode</item>
+		<item>device_settings</item>
+	</string-array>
 </resources>
