@@ -39,7 +39,9 @@ class MenuFragment : Fragment() {
 			findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToStatisticsFragment())
 		}
 
-		binding.settingsButton.setOnClickListener { }
+		binding.settingsButton.setOnClickListener {
+			findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToSettingsFragment())
+		}
 
 		binding.quitButton.setOnClickListener {
 			activity?.finishAndRemoveTask()
