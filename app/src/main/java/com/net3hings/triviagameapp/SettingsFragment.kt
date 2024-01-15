@@ -11,7 +11,6 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.net3hings.triviagameapp.database.StatisticsViewModel
 
-
 class SettingsFragment : PreferenceFragmentCompat() {
 
 	private val viewModel: StatisticsViewModel by activityViewModels {
