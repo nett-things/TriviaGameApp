@@ -1,5 +1,6 @@
 package com.net3hings.triviagameapp
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
@@ -72,7 +73,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
 		}
 
 		button?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-			viewModel.clearAll()
+			AlertDialog.Builder(context)
+				.setMessage(getString(R.string.clear_statistics_prompt))
+				.setPositiveButton(getString(R.string.confirm_button)) { _, _ -> viewModel.clearAll() }
+				.setNegativeButton(getString(R.string.cancel_button)) { _, _ -> }
+				.create()
+				.show()
+
 			true
 		}
 	}
