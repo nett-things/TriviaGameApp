@@ -69,6 +69,9 @@ dependencies {
 	// LiveData
 	implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
 
+	// Preference
+	implementation("androidx.preference:preference-ktx:1.2.1")
+
 	// Test implementations
 	testImplementation("junit:junit:4.13.2")
 	androidTestImplementation("androidx.test.ext:junit:1.1.5")
