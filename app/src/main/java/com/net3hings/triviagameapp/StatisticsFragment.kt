@@ -57,7 +57,7 @@ class StatisticsFragment : Fragment() {
 	}
 
 	private fun calculateData() {
-		if(items != null) {
+		if(items != null && items!!.isNotEmpty()) {
 			val categories = items?.map { it.category }
 			mostPlayedCategory = categories?.groupingBy { it }?.eachCount()?.maxBy { it.value }?.key!!
 
@@ -70,7 +70,7 @@ class StatisticsFragment : Fragment() {
 	}
 
 	private fun displayData() {
-		if(items != null) {
+		if(items != null && items!!.isNotEmpty()) {
 			binding.mostPlayedCategoryLabel.text = getString(
 				R.string.most_played_category_label_text,
 				resolveCategory(mostPlayedCategory)
