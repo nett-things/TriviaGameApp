@@ -8,7 +8,7 @@
 	<string name="dummy_answer_b">Kenya and Uganda</string>
 	<string name="dummy_answer_c">Mexico and the United States</string>
 	<string name="dummy_answer_d">India and Bangladesh</string>
-	<string name="correct_answer_msg">Correct answer!</string>
+	<string name="correct_answer_msg">Correct answer! +%d pts</string>
 	<string name="wrong_answer_msg">Wrong answer!</string>
 	<string name="loading_msg">Loading the trivia questions…</string>
 	<string name="cannot_load_msg">Couldn\'t load. Try again.</string>

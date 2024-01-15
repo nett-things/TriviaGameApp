@@ -32,7 +32,7 @@ class QuestionFragment : Fragment() {
 	private var score: Int = 0
 	private var waitForClick: Boolean = false
 	private var startTimeCount: Long = 0
-	private var timeElapsed: Long = 0
+	private var totalTimeElapsed: Long = 0
 
 	private enum class Answer {
 		A, B, C, D, TRUE, FALSE
@@ -113,7 +113,7 @@ class QuestionFragment : Fragment() {
 			args.type,
 			correctAnswers,
 			score,
-			timeElapsed
+			totalTimeElapsed
 		)
 
 		findNavController().navigate(QuestionFragmentDirections.actionQuestionFragmentToEndgameFragment(
@@ -225,7 +225,8 @@ class QuestionFragment : Fragment() {
 
 	private fun resolveAnswer(buttonClicked: Answer) {
 		// calculate elapsed time
-		timeElapsed += System.currentTimeMillis() - startTimeCount
+		val timeElapsed = System.currentTimeMillis() - startTimeCount
+		totalTimeElapsed += timeElapsed
 
 		// mark all wrong
 		binding.answerACard.setCardBackgroundColor(requireContext().getColor(R.color.red))
@@ -253,9 +254,14 @@ class QuestionFragment : Fragment() {
 		binding.answerTrueCard.isClickable = false
 		binding.answerFalseCard.isClickable = false
 
-		// update the prompt and correct answers count
+		// update the prompt, score and correct answers count
 		if(buttonClicked == answer) {
-			binding.promptLabel.text = getString(R.string.correct_answer_msg)
+			val points = calculateScore(timeElapsed)
+			score += points
+
+			binding.promptLabel.text = getString(R.string.correct_answer_msg, points)
+			binding.scoreLabel.text = getString(R.string.current_score_text, score)
+
 			correctAnswers++
 
 		} else
@@ -263,6 +269,12 @@ class QuestionFragment : Fragment() {
 
 		// wait for click on screen to advance
 		waitForClick = true
+	}
+
+	private fun calculateScore(time: Long): Int {
+		val points = 100 - ((time / 1000.0) * 10).toInt()
+
+		return if(points < 10) 10 else points
 	}
 
 	private fun resetAnswers() {
