@@ -13,8 +13,8 @@
 	<string name="loading_msg">Loading the trivia questions…</string>
 	<string name="cannot_load_msg">Couldn\'t load. Try again.</string>
 	<string name="quit_game_prompt">Are you sure you want to quit the game?</string>
-	<string name="yes_button">YES</string>
-	<string name="no_button">NO</string>
+	<string name="yes_button">Yes</string>
+	<string name="no_button">No</string>
 	<string name="category_label_text">Select Category:</string>
 	<string name="difficulty_label_text">Select Difficulty:</string>
 	<string name="type_label_text">Select Type:</string>
