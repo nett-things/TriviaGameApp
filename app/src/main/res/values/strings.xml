@@ -32,9 +32,9 @@
 	<string name="retry_button_text">Retry</string>
 	<string name="back_to_menu_button_text">Back to menu</string>
 	<string name="most_played_category_label_text">Most played category: %s</string>
-	<string name="average_correct_answers_label_text">Average correct answers: %s%</string>
-	<string name="average_score_label_text">Average score: %d</string>
-	<string name="average_answer_time_label_text">Average answer time: %ds</string>
+	<string name="average_correct_answers_label_text">Average correct answers: %.2f%%</string>
+	<string name="average_score_label_text">Average score: %.2f</string>
+	<string name="average_answer_time_label_text">Average answer time: %.2fs</string>
 	<string-array name="category_array">
 		<item>Any Category</item>
 		<item>General Knowledge</item>
