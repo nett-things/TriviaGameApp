@@ -24,7 +24,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/current_score_text"
-			android:background="android:@color/transparent"
+			android:background="@color/transparent"
 			tools:text="Current score: 0"/>
 	</androidx.cardview.widget.CardView>
 
@@ -50,14 +50,14 @@
 			<androidx.constraintlayout.widget.ConstraintLayout
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:background="android:@color/transparent">
+				android:background="@color/transparent">
 
 				<TextView
 					android:id="@+id/question_label"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:text="@string/question_label_text"
-					android:background="android:@color/transparent"
+					android:background="@color/transparent"
 					tools:text="Question 1 out of 10"
 					android:textAllCaps="true"
 					app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +70,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginTop="32dp"
 					android:layout_marginBottom="32dp"
-					android:background="android:@color/transparent"
+					android:background="@color/transparent"
 					tools:text="@string/dummy_question"
 					android:textAlignment="center"
 					android:textAllCaps="false"
@@ -121,7 +121,8 @@
 
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
-					android:layout_height="match_parent">
+					android:layout_height="match_parent"
+					android:background="@color/transparent">
 
 					<TextView
 						android:id="@+id/answer_true_label"
@@ -129,6 +130,7 @@
 						android:layout_height="wrap_content"
 						android:text="@string/true_answer_text"
 						android:textSize="20sp"
+						android:background="@color/transparent"
 						app:layout_constraintBottom_toBottomOf="parent"
 						app:layout_constraintEnd_toEndOf="parent"
 						app:layout_constraintStart_toStartOf="parent"
@@ -158,7 +160,8 @@
 
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
-					android:layout_height="match_parent">
+					android:layout_height="match_parent"
+					android:background="@color/transparent">
 
 					<TextView
 						android:id="@+id/answer_false_label"
@@ -166,6 +169,7 @@
 						android:layout_height="wrap_content"
 						android:text="@string/false_answer_text"
 						android:textSize="20sp"
+						android:background="@color/transparent"
 						app:layout_constraintBottom_toBottomOf="parent"
 						app:layout_constraintEnd_toEndOf="parent"
 						app:layout_constraintStart_toStartOf="parent"
@@ -200,13 +204,13 @@
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
-					android:background="android:@color/transparent">
+					android:background="@color/transparent">
 
 					<TextView
 						android:id="@+id/answer_a_label"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:background="android:@color/transparent"
+						android:background="@color/transparent"
 						tools:text="@string/dummy_answer_a"
 						android:textSize="20sp"
 						app:layout_constraintBottom_toBottomOf="parent"
@@ -239,13 +243,13 @@
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
-					android:background="android:@color/transparent">
+					android:background="@color/transparent">
 
 					<TextView
 						android:id="@+id/answer_b_label"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:background="android:@color/transparent"
+						android:background="@color/transparent"
 						tools:text="@string/dummy_answer_b"
 						android:textSize="20sp"
 						app:layout_constraintBottom_toBottomOf="parent"
@@ -278,13 +282,13 @@
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
-					android:background="android:@color/transparent">
+					android:background="@color/transparent">
 
 					<TextView
 						android:id="@+id/answer_c_label"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:background="android:@color/transparent"
+						android:background="@color/transparent"
 						tools:text="@string/dummy_answer_c"
 						android:textSize="20sp"
 						app:layout_constraintBottom_toBottomOf="parent"
@@ -316,13 +320,13 @@
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
-					android:background="android:@color/transparent">
+					android:background="@color/transparent">
 
 					<TextView
 						android:id="@+id/answer_d_label"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:background="android:@color/transparent"
+						android:background="@color/transparent"
 						tools:text="@string/dummy_answer_d"
 						android:textSize="20sp"
 						app:layout_constraintBottom_toBottomOf="parent"
