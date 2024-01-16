@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.net3hings.triviagameapp.databinding.FragmentSetupBinding
 import com.net3hings.triviagameapp.question.Question
 
-
 class SetupFragment : Fragment() {
 	private lateinit var binding: FragmentSetupBinding
 
