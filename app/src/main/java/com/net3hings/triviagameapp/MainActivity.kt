@@ -26,21 +26,27 @@ class MainActivity : AppCompatActivity() {
 
 	fun setThemeMode(mode: String, lightsOut: Boolean) {
 		when(mode) {
-			"light_mode" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+			"light_mode" -> {
+				setTheme(R.style.Base_Theme_TriviaGameApp)
+				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+			}
 
 			"dark_mode" -> {
 				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
 				if(lightsOut)
-					window.statusBarColor = getColor(R.color.black)
+					setTheme(R.style.Base_Theme_TriviaGameAppAmoled)
+				else
+					setTheme(R.style.Base_Theme_TriviaGameApp)
 			}
 
 			"device_settings" -> {
-				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+				if(resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES && lightsOut)
+					setTheme(R.style.Base_Theme_TriviaGameAppAmoled)
+				else
+					setTheme(R.style.Base_Theme_TriviaGameApp)
 
-				if(resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES)
-					if(lightsOut)
-						window.statusBarColor = getColor(R.color.black)
+				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 			}
 		}
 	}

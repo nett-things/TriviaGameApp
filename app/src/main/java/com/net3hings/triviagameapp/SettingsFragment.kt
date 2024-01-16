@@ -1,6 +1,7 @@
 package com.net3hings.triviagameapp
 
 import android.app.AlertDialog
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
@@ -43,19 +44,21 @@ class SettingsFragment : PreferenceFragmentCompat() {
 			lightsOutPreference?.isEnabled = true
 
 		uiPreference?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
+			(activity as MainActivity?)?.setThemeMode(newValue.toString(), preferences.getBoolean("lights_out_preference", false))
+
 			when(newValue.toString()) {
 				"dark_mode", "device_settings" -> lightsOutPreference?.isEnabled = true
 
 				else -> lightsOutPreference?.isEnabled = false // light_mode
 			}
 
-			(activity as MainActivity?)?.setThemeMode(newValue.toString(), preferences.getBoolean("lights_out_preference", false))
-
 			true
 		}
 
 		lightsOutPreference?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
 			(activity as MainActivity?)?.setThemeMode(preferences.getString("ui_preference", "light_mode")!!, newValue.toString().toBoolean())
+
+			activity?.recreate()
 
 			true
 		}

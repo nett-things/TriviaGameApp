@@ -28,9 +28,6 @@ class SetupFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		// apply dark background if lights out enabled
-		ifLightsOutApply(requireContext(), binding.container)
-
 		// set up the listener for handling the go back button
 		requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
 			override fun handleOnBackPressed() {
