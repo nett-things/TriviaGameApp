@@ -1,9 +1,5 @@
 package com.net3hings.triviagameapp
 
-import android.content.Context
-import android.content.res.Configuration
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.preference.PreferenceManager
 import com.net3hings.triviagameapp.question.Question
 
 object Helper {
@@ -53,19 +49,5 @@ object Helper {
 			Question.Type.MULTIPLE -> "multiple"
 			Question.Type.BOOLEAN -> "boolean"
 		}
-	}
-
-	fun ifLightsOutApply(context: Context, bindingContainer: ConstraintLayout) {
-		val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-
-		if(preferences.getBoolean("lights_out_preference", false))
-			when(preferences.getString("ui_preference", "light_mode")) {
-				"dark_mode" -> bindingContainer.setBackgroundColor(context.getColor(R.color.black))
-
-				"device_settings" -> {
-					if(context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES)
-						bindingContainer.setBackgroundColor(context.getColor(R.color.black))
-				}
-			}
 	}
 }

@@ -8,7 +8,6 @@ import android.widget.SeekBar
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.net3hings.triviagameapp.Helper.ifLightsOutApply
 import com.net3hings.triviagameapp.databinding.FragmentSetupBinding
 import com.net3hings.triviagameapp.question.Question
 
