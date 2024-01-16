@@ -13,7 +13,6 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_margin="4dp"
-		app:cardBackgroundColor="@color/white"
 		app:cardCornerRadius="5dp"
 		app:cardElevation="4dp"
 		app:contentPadding="5dp"
@@ -25,6 +24,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/current_score_text"
+			android:background="@color/transparent"
 			tools:text="Current score: 0"/>
 	</androidx.cardview.widget.CardView>
 
@@ -41,7 +41,6 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_margin="4dp"
-			app:cardBackgroundColor="@color/white"
 			app:cardCornerRadius="5dp"
 			app:cardElevation="4dp"
 			app:contentPadding="5dp"
@@ -50,13 +49,15 @@
 
 			<androidx.constraintlayout.widget.ConstraintLayout
 				android:layout_width="match_parent"
-				android:layout_height="match_parent">
+				android:layout_height="match_parent"
+				android:background="@color/transparent">
 
 				<TextView
 					android:id="@+id/question_label"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:text="@string/question_label_text"
+					android:background="@color/transparent"
 					tools:text="Question 1 out of 10"
 					android:textAllCaps="true"
 					app:layout_constraintEnd_toEndOf="parent"
@@ -69,6 +70,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginTop="32dp"
 					android:layout_marginBottom="32dp"
+					android:background="@color/transparent"
 					tools:text="@string/dummy_question"
 					android:textAlignment="center"
 					android:textAllCaps="false"
@@ -106,7 +108,6 @@
 				android:layout_margin="4dp"
 				android:clickable="true"
 				android:foreground="?android:selectableItemBackground"
-				app:cardBackgroundColor="@color/white"
 				app:cardCornerRadius="5dp"
 				app:cardElevation="4dp"
 				app:contentPaddingBottom="10dp"
@@ -120,7 +121,8 @@
 
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
-					android:layout_height="match_parent">
+					android:layout_height="match_parent"
+					android:background="@color/transparent">
 
 					<TextView
 						android:id="@+id/answer_true_label"
@@ -128,6 +130,7 @@
 						android:layout_height="wrap_content"
 						android:text="@string/true_answer_text"
 						android:textSize="20sp"
+						android:background="@color/transparent"
 						app:layout_constraintBottom_toBottomOf="parent"
 						app:layout_constraintEnd_toEndOf="parent"
 						app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +147,6 @@
 				android:layout_marginEnd="4dp"
 				android:clickable="true"
 				android:foreground="?android:selectableItemBackground"
-				app:cardBackgroundColor="@color/white"
 				app:cardCornerRadius="5dp"
 				app:cardElevation="4dp"
 				app:contentPaddingBottom="10dp"
@@ -158,7 +160,8 @@
 
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
-					android:layout_height="match_parent">
+					android:layout_height="match_parent"
+					android:background="@color/transparent">
 
 					<TextView
 						android:id="@+id/answer_false_label"
@@ -166,6 +169,7 @@
 						android:layout_height="wrap_content"
 						android:text="@string/false_answer_text"
 						android:textSize="20sp"
+						android:background="@color/transparent"
 						app:layout_constraintBottom_toBottomOf="parent"
 						app:layout_constraintEnd_toEndOf="parent"
 						app:layout_constraintStart_toStartOf="parent"
@@ -187,7 +191,6 @@
 				android:layout_margin="4dp"
 				android:clickable="true"
 				android:foreground="?android:selectableItemBackground"
-				app:cardBackgroundColor="@color/white"
 				app:cardCornerRadius="5dp"
 				app:cardElevation="4dp"
 				app:contentPaddingBottom="10dp"
@@ -200,12 +203,14 @@
 
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
-					android:layout_height="match_parent">
+					android:layout_height="match_parent"
+					android:background="@color/transparent">
 
 					<TextView
 						android:id="@+id/answer_a_label"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:background="@color/transparent"
 						tools:text="@string/dummy_answer_a"
 						android:textSize="20sp"
 						app:layout_constraintBottom_toBottomOf="parent"
@@ -225,7 +230,6 @@
 				android:layout_marginBottom="4dp"
 				android:clickable="true"
 				android:foreground="?android:selectableItemBackground"
-				app:cardBackgroundColor="@color/white"
 				app:cardCornerRadius="5dp"
 				app:cardElevation="4dp"
 				app:contentPaddingBottom="10dp"
@@ -238,12 +242,14 @@
 
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
-					android:layout_height="match_parent">
+					android:layout_height="match_parent"
+					android:background="@color/transparent">
 
 					<TextView
 						android:id="@+id/answer_b_label"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:background="@color/transparent"
 						tools:text="@string/dummy_answer_b"
 						android:textSize="20sp"
 						app:layout_constraintBottom_toBottomOf="parent"
@@ -263,7 +269,6 @@
 				android:layout_marginBottom="4dp"
 				android:clickable="true"
 				android:foreground="?android:selectableItemBackground"
-				app:cardBackgroundColor="@color/white"
 				app:cardCornerRadius="5dp"
 				app:cardElevation="4dp"
 				app:contentPaddingBottom="10dp"
@@ -276,12 +281,14 @@
 
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
-					android:layout_height="match_parent">
+					android:layout_height="match_parent"
+					android:background="@color/transparent">
 
 					<TextView
 						android:id="@+id/answer_c_label"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:background="@color/transparent"
 						tools:text="@string/dummy_answer_c"
 						android:textSize="20sp"
 						app:layout_constraintBottom_toBottomOf="parent"
@@ -300,7 +307,6 @@
 				android:layout_marginEnd="4dp"
 				android:clickable="true"
 				android:foreground="?android:selectableItemBackground"
-				app:cardBackgroundColor="@color/white"
 				app:cardCornerRadius="5dp"
 				app:cardElevation="4dp"
 				app:contentPaddingBottom="10dp"
@@ -313,12 +319,14 @@
 
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
-					android:layout_height="match_parent">
+					android:layout_height="match_parent"
+					android:background="@color/transparent">
 
 					<TextView
 						android:id="@+id/answer_d_label"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:background="@color/transparent"
 						tools:text="@string/dummy_answer_d"
 						android:textSize="20sp"
 						app:layout_constraintBottom_toBottomOf="parent"
