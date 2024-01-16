@@ -49,13 +49,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
 				else -> lightsOutPreference?.isEnabled = false // light_mode
 			}
 
-			(activity as MainActivity?)?.setThemeMode(newValue.toString())
+			(activity as MainActivity?)?.setThemeMode(newValue.toString(), preferences.getBoolean("lights_out_preference", false))
 
 			true
 		}
 
 		lightsOutPreference?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
-			//(activity as MainActivity?)?.setThemeMode()
+			(activity as MainActivity?)?.setThemeMode(preferences.getString("ui_preference", "light_mode")!!, newValue.toString().toBoolean())
 
 			true
 		}

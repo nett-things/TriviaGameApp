@@ -1,15 +1,17 @@
 package com.net3hings.triviagameapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.net3hings.triviagameapp.Helper.ifLightsOutApply
 import com.net3hings.triviagameapp.databinding.FragmentSetupBinding
 import com.net3hings.triviagameapp.question.Question
+
 
 class SetupFragment : Fragment() {
 	private lateinit var binding: FragmentSetupBinding
@@ -25,6 +27,9 @@ class SetupFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		// apply dark background if lights out enabled
+		ifLightsOutApply(requireContext(), binding.container)
 
 		// set up the listener for handling the go back button
 		requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
