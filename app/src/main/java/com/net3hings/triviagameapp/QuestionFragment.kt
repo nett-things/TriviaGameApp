@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Html
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -26,6 +26,8 @@ class QuestionFragment : Fragment() {
 			(activity?.application as TriviaGameApplication).repository
 		)
 	}
+
+	private var originalBackgroundColor: Int = 0
 
 	private var currentQuestion: Int = 0
 	private var correctAnswers: Int = 0
@@ -52,6 +54,9 @@ class QuestionFragment : Fragment() {
 	@SuppressLint("ClickableViewAccessibility")
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		// get the original background color from a CardView
+		originalBackgroundColor = binding.answerACard.cardBackgroundColor.defaultColor
 
 		// set up the listener for handling the go back button
 		requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
@@ -279,22 +284,22 @@ class QuestionFragment : Fragment() {
 	}
 
 	private fun resetAnswers() {
-		binding.answerACard.setCardBackgroundColor(requireContext().getColor(R.color.white))
+		binding.answerACard.setCardBackgroundColor(originalBackgroundColor)
 		binding.answerACard.isClickable = true
 
-		binding.answerBCard.setCardBackgroundColor(requireContext().getColor(R.color.white))
+		binding.answerBCard.setCardBackgroundColor(originalBackgroundColor)
 		binding.answerBCard.isClickable = true
 
-		binding.answerCCard.setCardBackgroundColor(requireContext().getColor(R.color.white))
+		binding.answerCCard.setCardBackgroundColor(originalBackgroundColor)
 		binding.answerCCard.isClickable = true
 
-		binding.answerDCard.setCardBackgroundColor(requireContext().getColor(R.color.white))
+		binding.answerDCard.setCardBackgroundColor(originalBackgroundColor)
 		binding.answerDCard.isClickable = true
 
-		binding.answerTrueCard.setCardBackgroundColor(requireContext().getColor(R.color.white))
+		binding.answerTrueCard.setCardBackgroundColor(originalBackgroundColor)
 		binding.answerTrueCard.isClickable = true
 
-		binding.answerFalseCard.setCardBackgroundColor(requireContext().getColor(R.color.white))
+		binding.answerFalseCard.setCardBackgroundColor(originalBackgroundColor)
 		binding.answerFalseCard.isClickable = true
 	}
 }
