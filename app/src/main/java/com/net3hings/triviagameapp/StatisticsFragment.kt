@@ -63,11 +63,11 @@ class StatisticsFragment : Fragment() {
 			val categories = items?.map { it.category }
 			mostPlayedCategory = categories?.groupingBy { it }?.eachCount()?.maxBy { it.value }?.key!!
 
-			avgCorrectAnswers = items?.sumOf { it.correctAnswers }!!.toDouble() / items?.sumOf { it.questions }!!
+			avgCorrectAnswers = (items?.sumOf { it.correctAnswers }!! * 100.0) / items?.sumOf { it.questions }!!
 
 			avgScore = items?.map { it.score }!!.average()
 
-			avgAnswerTime = items?.sumOf { it.duration }!!.toDouble() / items?.sumOf { it.questions }!!
+			avgAnswerTime = (items?.sumOf { it.duration }!! / 1000.0) / items?.sumOf { it.questions }!!
 		}
 	}
 
