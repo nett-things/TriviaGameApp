@@ -32,6 +32,8 @@ class LoadingFragment : Fragment() {
 	): View {
 		binding = FragmentLoadingBinding.inflate(inflater, container, false)
 
+		(activity as MainActivity).hideActionBar()
+
 		return binding.root
 	}
 

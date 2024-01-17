@@ -20,6 +20,8 @@ class SetupFragment : Fragment() {
 	): View {
 		binding = FragmentSetupBinding.inflate(inflater, container, false)
 
+		(activity as MainActivity).showActionBar()
+
 		return binding.root
 	}
 

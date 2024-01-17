@@ -3,7 +3,9 @@ package com.net3hings.triviagameapp
 import android.app.AlertDialog
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -22,6 +24,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
 	override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 		setPreferencesFromResource(R.xml.preferences, rootKey)
+	}
+
+	override fun onCreateView(
+		inflater: LayoutInflater,
+		container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View {
+		(activity as MainActivity).showActionBar()
+
+		return super.onCreateView(inflater, container, savedInstanceState)
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

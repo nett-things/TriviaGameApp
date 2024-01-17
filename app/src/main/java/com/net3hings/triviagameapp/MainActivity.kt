@@ -1,5 +1,6 @@
 package com.net3hings.triviagameapp
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -13,7 +14,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.preference.PreferenceManager
 import com.net3hings.triviagameapp.databinding.ActivityMainBinding
-
 
 class MainActivity : AppCompatActivity() {
 	private lateinit var binding: ActivityMainBinding
@@ -61,6 +61,18 @@ class MainActivity : AppCompatActivity() {
 				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 			}
 		}
+	}
+
+	@SuppressLint("RestrictedApi")
+	fun showActionBar() {
+		supportActionBar?.setShowHideAnimationEnabled(false)
+		supportActionBar?.show()
+	}
+
+	@SuppressLint("RestrictedApi")
+	fun hideActionBar() {
+		supportActionBar?.setShowHideAnimationEnabled(false)
+		supportActionBar?.hide()
 	}
 
 	private fun setupActionBar() {
