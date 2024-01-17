@@ -6,13 +6,16 @@
 		app:entryValues="@array/light_dark_ui_values"
 		app:key="ui_preference"
 		app:title="User interface theme"
-		app:summary="Choose the app's theme" />
+		app:summary="Choose the UI mode" />
+
 	<SwitchPreference
 		app:defaultValue="false"
 		app:key="lights_out_preference"
 		app:title="Enable lights out"
 		app:enabled="false" />
+
 	<Preference
-		app:title="Clear statistics"
+		app:title="Clear data"
+		app:summary="Remove all gathered statistics data"
 		app:key="clear_statistics_preference" />
 </PreferenceScreen>
