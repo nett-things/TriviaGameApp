@@ -67,7 +67,7 @@ class StatisticsFragment : Fragment() {
 
 			avgScore = items?.map { it.score }!!.average()
 
-			avgAnswerTime = items?.sumOf { it.duration }!!.toDouble() / items?.sumOf { it.questions }!!
+			avgAnswerTime = (items?.sumOf { it.duration }!! / 1000.0) / items?.sumOf { it.questions }!!
 		}
 	}
 
