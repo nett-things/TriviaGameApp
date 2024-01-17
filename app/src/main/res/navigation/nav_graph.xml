@@ -8,8 +8,8 @@
 	<fragment
 		android:id="@+id/menuFragment"
 		android:name="com.net3hings.triviagameapp.MenuFragment"
-		android:label="fragment_menu"
-		tools:layout="@layout/fragment_menu" >
+		android:label=" "
+		tools:layout="@layout/fragment_menu">
 		<action
 			android:id="@+id/action_menuFragment_to_setupFragment"
 			app:destination="@id/setupFragment" />
@@ -23,8 +23,8 @@
 	<fragment
 		android:id="@+id/questionFragment"
 		android:name="com.net3hings.triviagameapp.QuestionFragment"
-		android:label="fragment_question"
-		tools:layout="@layout/fragment_question" >
+		android:label=" "
+		tools:layout="@layout/fragment_question">
 		<argument
 			android:name="numOfQuestions"
 			app:argType="integer" />
@@ -47,8 +47,8 @@
 	<fragment
 		android:id="@+id/loadingFragment"
 		android:name="com.net3hings.triviagameapp.LoadingFragment"
-		android:label="fragment_loading"
-		tools:layout="@layout/fragment_loading" >
+		android:label=" "
+		tools:layout="@layout/fragment_loading">
 		<action
 			android:id="@+id/action_loadingFragment_to_questionFragment"
 			app:destination="@id/questionFragment" />
@@ -68,8 +68,8 @@
 	<fragment
 		android:id="@+id/setupFragment"
 		android:name="com.net3hings.triviagameapp.SetupFragment"
-		android:label="fragment_setup"
-		tools:layout="@layout/fragment_setup" >
+		android:label="Game setup"
+		tools:layout="@layout/fragment_setup">
 		<action
 			android:id="@+id/action_setupFragment_to_loadingFragment"
 			app:destination="@id/loadingFragment" />
@@ -77,8 +77,8 @@
 	<fragment
 		android:id="@+id/endgameFragment"
 		android:name="com.net3hings.triviagameapp.EndgameFragment"
-		android:label="fragment_endgame"
-		tools:layout="@layout/fragment_endgame" >
+		android:label=" "
+		tools:layout="@layout/fragment_endgame">
 		<argument
 			android:name="numOfQuestions"
 			app:argType="integer" />
@@ -92,10 +92,10 @@
 	<fragment
 		android:id="@+id/statisticsFragment"
 		android:name="com.net3hings.triviagameapp.StatisticsFragment"
-		android:label="fragment_statistics"
+		android:label="Statistics"
 		tools:layout="@layout/fragment_statistics" />
 	<fragment
 		android:id="@+id/settingsFragment"
 		android:name="com.net3hings.triviagameapp.SettingsFragment"
-		android:label="SettingsFragment" />
+		android:label="Settings" />
 </navigation>

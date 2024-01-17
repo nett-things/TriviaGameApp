@@ -1,5 +1,6 @@
 package com.net3hings.triviagameapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,11 +13,14 @@ import com.net3hings.triviagameapp.databinding.FragmentMenuBinding
 class MenuFragment : Fragment() {
 	private lateinit var binding: FragmentMenuBinding
 
+	@SuppressLint("RestrictedApi")
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View {
 		binding = FragmentMenuBinding.inflate(inflater, container, false)
+
+		(activity as MainActivity).hideActionBar()
 
 		return binding.root
 	}
