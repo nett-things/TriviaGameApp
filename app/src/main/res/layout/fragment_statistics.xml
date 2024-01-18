@@ -13,10 +13,20 @@
 		android:layout_height="wrap_content"
 		android:layout_marginStart="24dp"
 		android:layout_marginTop="24dp"
+		android:layout_marginEnd="24dp"
 		android:text="@string/most_played_category_label_text"
+		android:textAlignment="textStart"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
+
+	<View
+		style="@style/Divider"
+		android:id="@+id/average_correct_answers_divider"
+		android:layout_marginTop="24dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/most_played_category_label" />
 
 	<TextView
 		android:id="@+id/average_correct_answers_label"
@@ -24,10 +34,31 @@
 		android:layout_height="wrap_content"
 		android:layout_marginStart="24dp"
 		android:layout_marginTop="24dp"
+		android:layout_marginEnd="24dp"
 		android:text="@string/average_correct_answers_label_text"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/most_played_category_label" />
+		app:layout_constraintTop_toBottomOf="@+id/average_correct_answers_divider" />
+
+	<com.patrykandpatrick.vico.views.chart.ChartView
+		android:id="@+id/average_correct_answers_chart"
+		android:layout_width="0dp"
+		android:layout_height="98dp"
+		android:layout_marginTop="24dp"
+		app:chart="line"
+		app:layout_constraintEnd_toEndOf="@+id/average_correct_answers_label"
+		app:layout_constraintStart_toStartOf="@+id/average_correct_answers_label"
+		app:layout_constraintTop_toBottomOf="@+id/average_correct_answers_label"
+		app:showBottomAxis="false"
+		app:showStartAxis="true" />
+
+	<View
+		style="@style/Divider"
+		android:id="@+id/average_score_divider"
+		android:layout_marginTop="24dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/average_correct_answers_chart" />
 
 	<TextView
 		android:id="@+id/average_score_label"
@@ -35,10 +66,31 @@
 		android:layout_height="wrap_content"
 		android:layout_marginStart="24dp"
 		android:layout_marginTop="24dp"
+		android:layout_marginEnd="24dp"
 		android:text="@string/average_score_label_text"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/average_correct_answers_label" />
+		app:layout_constraintTop_toBottomOf="@+id/average_score_divider" />
+
+	<com.patrykandpatrick.vico.views.chart.ChartView
+		android:id="@+id/average_score_chart"
+		android:layout_width="0dp"
+		android:layout_height="98dp"
+		android:layout_marginTop="24dp"
+		app:chart="line"
+		app:layout_constraintEnd_toEndOf="@+id/average_score_label"
+		app:layout_constraintStart_toStartOf="@+id/average_score_label"
+		app:layout_constraintTop_toBottomOf="@+id/average_score_label"
+		app:showBottomAxis="false"
+		app:showStartAxis="true" />
+
+	<View
+		style="@style/Divider"
+		android:id="@+id/average_answer_time_divider"
+		android:layout_marginTop="24dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/average_score_chart" />
 
 	<TextView
 		android:id="@+id/average_answer_time_label"
@@ -46,10 +98,23 @@
 		android:layout_height="wrap_content"
 		android:layout_marginStart="24dp"
 		android:layout_marginTop="24dp"
+		android:layout_marginEnd="24dp"
 		android:text="@string/average_answer_time_label_text"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/average_score_label" />
+		app:layout_constraintTop_toBottomOf="@+id/average_answer_time_divider" />
+
+	<com.patrykandpatrick.vico.views.chart.ChartView
+		android:id="@+id/average_answer_time_chart"
+		android:layout_width="0dp"
+		android:layout_height="98dp"
+		android:layout_marginTop="24dp"
+		app:chart="line"
+		app:layout_constraintEnd_toEndOf="@+id/average_answer_time_label"
+		app:layout_constraintStart_toStartOf="@+id/average_answer_time_label"
+		app:layout_constraintTop_toBottomOf="@+id/average_answer_time_label"
+		app:showBottomAxis="false"
+		app:showStartAxis="true" />
 
 	<TextView
 		android:id="@+id/no_data_label"
@@ -62,4 +127,5 @@
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent"
 		tools:visibility="invisible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
