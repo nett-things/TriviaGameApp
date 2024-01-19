@@ -1,6 +1,8 @@
 package com.net3hings.triviagameapp
 
 import com.net3hings.triviagameapp.question.Question
+import com.patrykandpatrick.vico.core.entry.FloatEntry
+import com.patrykandpatrick.vico.core.entry.entryOf
 
 object Helper {
 	fun resolveCategory(category: Int): String {
@@ -49,5 +51,14 @@ object Helper {
 			Question.Type.MULTIPLE -> "multiple"
 			Question.Type.BOOLEAN -> "boolean"
 		}
+	}
+
+	fun convertToListOfFloatEntries(items: MutableList<Double>): List<FloatEntry> {
+		val newList: MutableList<FloatEntry> = mutableListOf()
+
+		for((index, value) in items.withIndex())
+			newList.add(entryOf(index + 1, value))
+
+		return newList
 	}
 }
