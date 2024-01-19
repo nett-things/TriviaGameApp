@@ -1,6 +1,7 @@
 package com.net3hings.triviagameapp
 
 import android.os.Bundle
+import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.net3hings.triviagameapp.database.StatisticsItem
 import com.net3hings.triviagameapp.database.StatisticsViewModel
 import com.net3hings.triviagameapp.databinding.FragmentStatisticsBinding
-import com.patrykandpatrick.vico.core.entry.entriesOf
 import com.patrykandpatrick.vico.core.entry.entryModelOf
 
 class StatisticsFragment : Fragment() {
@@ -77,19 +77,23 @@ class StatisticsFragment : Fragment() {
 
 	private fun displayData() {
 		if(items != null && items!!.isNotEmpty()) {
-			binding.mostPlayedCategoryLabel.text = getString(
-				R.string.most_played_category_label_text,
-				Helper.resolveCategory(mostPlayedCategory)
-			)
+			binding.mostPlayedCategory.text = Html.fromHtml(getString(
+				R.string.most_played_category_text,
+				Helper.resolveCategory(mostPlayedCategory),
+				100.0
+			), Html.FROM_HTML_MODE_COMPACT)
 
-			binding.averageCorrectAnswersLabel.text = getString(R.string.average_correct_answers_label_text, avgCorrectAnswers.last())
+			binding.averageCorrectAnswers.text = getString(R.string.average_correct_answers_text, avgCorrectAnswers.last())
 			binding.averageCorrectAnswersChart.setModel(entryModelOf(Helper.convertToListOfFloatEntries(avgCorrectAnswers)))
+			binding.averageCorrectAnswersChart.marker = Helper.makeMarker(requireContext())
 
-			binding.averageScoreLabel.text = getString(R.string.average_score_label_text, avgScores.last())
+			binding.averageScore.text = getString(R.string.average_score_text, avgScores.last())
 			binding.averageScoreChart.setModel(entryModelOf(Helper.convertToListOfFloatEntries(avgScores)))
+			binding.averageScoreChart.marker = Helper.makeMarker(requireContext())
 
-			binding.averageAnswerTimeLabel.text = getString(R.string.average_answer_time_label_text, avgAnswerTimes.last())
+			binding.averageAnswerTime.text = getString(R.string.average_answer_time_text, avgAnswerTimes.last())
 			binding.averageAnswerTimeChart.setModel(entryModelOf(Helper.convertToListOfFloatEntries(avgAnswerTimes)))
+			binding.averageAnswerTimeChart.marker = Helper.makeMarker(requireContext())
 
 
 		} else {
