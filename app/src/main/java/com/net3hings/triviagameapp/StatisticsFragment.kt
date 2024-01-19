@@ -64,29 +64,15 @@ class StatisticsFragment : Fragment() {
 		if(items != null && items!!.isNotEmpty()) {
 			mostPlayedCategory = items?.map { it.category }?.groupingBy { it }?.eachCount()?.maxBy { it.value }?.key!!
 
-			calculateAvgCorrectAnswers()
-			calculateAvgScores()
-			calculateAvgAnswerTimes()
+			val ratiosOfCorrectAnswers = items?.map { it.correctAnswers }!!.zip(items?.map { it.questions }!!) { a, b -> a * 100.0 / b }
+			val answerTimes = items?.map { it.duration }!!.zip(items?.map { it.questions }!!) { a, b -> (a / 1000.0) / b }
+
+			for(i in items!!.indices) {
+				avgCorrectAnswers.add(ratiosOfCorrectAnswers.slice(0..i).average())
+				avgScores.add(items?.map { it.score }!!.slice(0..i).average())
+				avgAnswerTimes.add(answerTimes.slice(0..i).average())
+			}
 		}
-	}
-
-	private fun calculateAvgCorrectAnswers() {
-		val ratiosOfCorrectAnswers = items?.map { it.correctAnswers }!!.zip(items?.map { it.questions }!!) { a, b -> a * 100.0 / b }
-
-		for(i in items!!.indices)
-			avgCorrectAnswers.add(ratiosOfCorrectAnswers.slice(0..i).average())
-	}
-
-	private fun calculateAvgScores() {
-		for(i in items!!.indices)
-			avgScores.add(items?.map { it.score }!!.slice(0..i).average())
-	}
-
-	private fun calculateAvgAnswerTimes() {
-		val answerTimes = items?.map { it.duration }!!.zip(items?.map { it.questions }!!) { a, b -> (a / 1000.0) / b }
-
-		for(i in items!!.indices)
-			avgAnswerTimes.add(answerTimes.slice(0..i).average())
 	}
 
 	private fun displayData() {
