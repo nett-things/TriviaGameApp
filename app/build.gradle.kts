@@ -73,9 +73,6 @@ dependencies {
 	implementation("androidx.preference:preference-ktx:1.2.1")
 
 	// Vico
-	implementation("com.patrykandpatrick.vico:compose:1.13.1")
-	implementation("com.patrykandpatrick.vico:compose-m2:1.13.1")
-	implementation("com.patrykandpatrick.vico:compose-m3:1.13.1")
 	implementation("com.patrykandpatrick.vico:core:1.13.1")
 	implementation("com.patrykandpatrick.vico:views:1.13.1")
 
