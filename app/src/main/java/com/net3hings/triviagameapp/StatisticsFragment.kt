@@ -11,6 +11,9 @@ import androidx.navigation.fragment.findNavController
 import com.net3hings.triviagameapp.database.StatisticsItem
 import com.net3hings.triviagameapp.database.StatisticsViewModel
 import com.net3hings.triviagameapp.databinding.FragmentStatisticsBinding
+import com.patrykandpatrick.vico.core.axis.formatter.DecimalFormatAxisValueFormatter
+import com.patrykandpatrick.vico.core.axis.vertical.VerticalAxis
+import com.patrykandpatrick.vico.core.entry.entryModelOf
 
 class StatisticsFragment : Fragment() {
 	private lateinit var binding: FragmentStatisticsBinding
@@ -23,9 +26,10 @@ class StatisticsFragment : Fragment() {
 
 	private var items: List<StatisticsItem>? = null
 	private var mostPlayedCategory: Int = 0
-	private var avgCorrectAnswers: Double = 0.0
-	private var avgScore: Double = 0.0
-	private var avgAnswerTime: Double = 0.0
+	private var mostPlayedCategoryPercent: Double = 0.0
+	private var avgCorrectAnswers: MutableList<Double> = mutableListOf()
+	private var avgScores: MutableList<Double> = mutableListOf()
+	private var avgAnswerTimes: MutableList<Double> = mutableListOf()
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -52,42 +56,80 @@ class StatisticsFragment : Fragment() {
 			itemList?.let {
 				items = itemList
 
-				calculateData()
-				displayData()
+				if(items!!.isNotEmpty()) {
+					calculateData()
+					setupCharts()
+					displayData()
+
+					binding.progressBar.visibility = View.GONE
+					binding.dataContainer.visibility = View.VISIBLE
+
+				} else {
+					binding.progressBar.visibility = View.GONE
+					binding.noDataLabel.visibility =  View.VISIBLE
+				}
 			}
 		}
 	}
 
 	private fun calculateData() {
-		if(items != null && items!!.isNotEmpty()) {
-			val categories = items?.map { it.category }
-			mostPlayedCategory = categories?.groupingBy { it }?.eachCount()?.maxBy { it.value }?.key!!
+		mostPlayedCategory = items?.map { it.category }?.groupingBy { it }?.eachCount()?.maxBy { it.value }?.key!!
+		mostPlayedCategoryPercent = items?.map { it.category }?.count { it == mostPlayedCategory }!!.toDouble() / items?.size!!
 
-			avgCorrectAnswers = (items?.sumOf { it.correctAnswers }!! * 100.0) / items?.sumOf { it.questions }!!
+		val ratiosOfCorrectAnswers = items?.map { it.correctAnswers }!!.zip(items?.map { it.questions }!!) { a, b -> a.toDouble() / b }
+		val answerTimes = items?.map { it.duration }!!.zip(items?.map { it.questions }!!) { a, b -> (a / 1000.0) / b }
 
-			avgScore = items?.map { it.score }!!.average()
+		for(i in items!!.indices) {
+			avgCorrectAnswers.add(ratiosOfCorrectAnswers.slice(0..i).average())
+			avgScores.add(items?.map { it.score }!!.slice(0..i).average())
+			avgAnswerTimes.add(answerTimes.slice(0..i).average())
+		}
+	}
 
-			avgAnswerTime = (items?.sumOf { it.duration }!! / 1000.0) / items?.sumOf { it.questions }!!
+	private fun setupCharts() {
+		with(binding) {
+			val averageCorrectAnswersChartVerticalAxis = averageCorrectAnswersChart.startAxis as VerticalAxis
+			averageCorrectAnswersChartVerticalAxis.valueFormatter = DecimalFormatAxisValueFormatter("###%")
+			averageCorrectAnswersChart.startAxis = averageCorrectAnswersChartVerticalAxis
+
+			averageCorrectAnswersChart.marker = Helper.makeMarker(requireContext())
+
+
+			val averageScoreChartVerticalAxis = averageScoreChart.startAxis as VerticalAxis
+			averageScoreChartVerticalAxis.valueFormatter = DecimalFormatAxisValueFormatter("###,###")
+			averageScoreChart.startAxis = averageScoreChartVerticalAxis
+
+			averageScoreChart.marker = Helper.makeMarker(requireContext())
+
+
+			val averageAnswerTimeChartVerticalAxis = averageAnswerTimeChart.startAxis as VerticalAxis
+			averageAnswerTimeChartVerticalAxis.valueFormatter = DecimalFormatAxisValueFormatter("###,###.#")
+			averageAnswerTimeChart.startAxis = averageAnswerTimeChartVerticalAxis
+
+			averageAnswerTimeChart.marker = Helper.makeMarker(requireContext())
 		}
 	}
 
 	private fun displayData() {
-		if(items != null && items!!.isNotEmpty()) {
-			binding.mostPlayedCategoryLabel.text = getString(
-				R.string.most_played_category_label_text,
-				Helper.resolveCategory(mostPlayedCategory)
-			)
-			binding.averageCorrectAnswersLabel.text = getString(R.string.average_correct_answers_label_text, avgCorrectAnswers)
-			binding.averageScoreLabel.text = getString(R.string.average_score_label_text, avgScore)
-			binding.averageAnswerTimeLabel.text = getString(R.string.average_answer_time_label_text, avgAnswerTime)
+		binding.mostPlayedCategory.text = getString(
+			R.string.most_played_category_text,
+			Helper.resolveCategory(mostPlayedCategory)
+		)
+		binding.mostPlayedCategoryPercent.text = getString(
+			R.string.most_played_category_percent_text,
+			mostPlayedCategoryPercent * 100
+		)
 
-		} else {
-			binding.mostPlayedCategoryLabel.visibility = View.INVISIBLE
-			binding.averageCorrectAnswersLabel.visibility = View.INVISIBLE
-			binding.averageScoreLabel.visibility = View.INVISIBLE
-			binding.averageAnswerTimeLabel.visibility = View.INVISIBLE
+		binding.averageCorrectAnswers.text =
+			getString(R.string.average_correct_answers_text,
+			avgCorrectAnswers.last() * 100
+		)
+		binding.averageCorrectAnswersChart.setModel(entryModelOf(Helper.convertToListOfFloatEntries(avgCorrectAnswers)))
 
-			binding.noDataLabel.visibility = View.VISIBLE
-		}
+		binding.averageScore.text = getString(R.string.average_score_text, avgScores.last())
+		binding.averageScoreChart.setModel(entryModelOf(Helper.convertToListOfFloatEntries(avgScores)))
+
+		binding.averageAnswerTime.text = getString(R.string.average_answer_time_text, avgAnswerTimes.last())
+		binding.averageAnswerTimeChart.setModel(entryModelOf(Helper.convertToListOfFloatEntries(avgAnswerTimes)))
 	}
 }

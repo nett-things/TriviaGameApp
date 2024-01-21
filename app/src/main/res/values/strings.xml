@@ -31,12 +31,17 @@
 	<string name="result_label_text">You\'ve answered %d questions\ncorrectly out of %d\n\nFinal score: %d</string>
 	<string name="retry_button_text">Retry</string>
 	<string name="back_to_menu_button_text">Back to menu</string>
-	<string name="most_played_category_label_text">Most played category: %s</string>
-	<string name="average_correct_answers_label_text">Average correct answers: %.2f%%</string>
-	<string name="average_score_label_text">Average score: %.2f</string>
-	<string name="average_answer_time_label_text">Average answer time: %.2fs</string>
+	<string name="most_played_category_label_text">Most played category</string>
+	<string name="average_correct_answers_label_text">Average correct answers</string>
+	<string name="average_score_label_text">Average score</string>
+	<string name="average_answer_time_label_text">Average answer time</string>
 	<string name="no_data_label_text">Play at least one game to see your gameplay statistics!</string>
 	<string name="clear_statistics_prompt">Are you sure you want to clear your statistics data?\n\n<b><i>This action is irreversible</i></b></string>
 	<string name="confirm_button">Confirm</string>
 	<string name="cancel_button">Cancel</string>
+	<string name="most_played_category_text">%s</string>
+	<string name="average_correct_answers_text">%.2f%%</string>
+	<string name="average_score_text">%.2f points</string>
+	<string name="average_answer_time_text">%.2f seconds</string>
+	<string name="most_played_category_percent_text">(%.2f%% out of all)</string>
 </resources>
