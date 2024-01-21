@@ -100,7 +100,7 @@ object Helper {
 
 	fun makeMarker(context: Context): Marker {
 		val labelBackgroundColor = context.getColor(
-			Helper.getAttributeValue(
+			getAttributeValue(
 				context,
 				com.google.android.material.R.attr.colorSurface
 			)!!
