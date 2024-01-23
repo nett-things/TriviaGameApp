@@ -44,4 +44,10 @@
 	<string name="average_score_text">%.2f points</string>
 	<string name="average_answer_time_text">%.2f seconds</string>
 	<string name="most_played_category_percent_text">(%.2f%% out of all)</string>
+	<string name="easy_text">Easy</string>
+	<string name="medium_text">Medium</string>
+	<string name="hard_text">Hard</string>
+	<string name="any_text">Any</string>
+	<string name="multiple_choice_text">Multiple Choice</string>
+	<string name="true_false_text">True/False</string>
 </resources>
