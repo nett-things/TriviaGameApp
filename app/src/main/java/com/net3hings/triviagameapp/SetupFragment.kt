@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -35,36 +34,32 @@ class SetupFragment : Fragment() {
 			}
 		})
 
-		binding.numOfQuestionsLabel.text = getString(R.string.number_of_questions_label_text, binding.numberOfQuestionsSeekbar.progress * 5)
+		binding.numOfQuestionsLabel.text = getString(R.string.number_of_questions_label_text, binding.numberOfQuestionsSlider.value.toInt())
 
-		binding.numberOfQuestionsSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-			override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-				binding.numOfQuestionsLabel.text = getString(R.string.number_of_questions_label_text, progress * 5)
-			}
+		binding.numberOfQuestionsSlider.addOnChangeListener { _, value, _ ->
+			binding.numOfQuestionsLabel.text = getString(R.string.number_of_questions_label_text, value.toInt())
+		}
 
-			override fun onStartTrackingTouch(seekBar: SeekBar) { }
-			override fun onStopTrackingTouch(seekBar: SeekBar) { }
-		})
 
 		binding.startGameButton.setOnClickListener {
 			findNavController().navigate(SetupFragmentDirections
 				.actionSetupFragmentToLoadingFragment(
-					binding.numberOfQuestionsSeekbar.progress * 5,
+					binding.numberOfQuestionsSlider.value.toInt(),
 					when(binding.categorySpinner.selectedItemPosition) {
 						0 -> 0
 						else -> binding.categorySpinner.selectedItemPosition + 8
 					},
-					when(binding.difficultyRadioGroup.checkedRadioButtonId) {
-						R.id.difficulty_any_radioButton -> Question.Difficulty.ANY
-						R.id.difficulty_easy_radioButton -> Question.Difficulty.EASY
-						R.id.difficulty_medium_radioButton -> Question.Difficulty.MEDIUM
-						R.id.difficulty_hard_radioButton -> Question.Difficulty.HARD
+					when(binding.difficultyChipGroup.checkedChipId) {
+						R.id.difficulty_any_chip -> Question.Difficulty.ANY
+						R.id.difficulty_easy_chip -> Question.Difficulty.EASY
+						R.id.difficulty_medium_chip -> Question.Difficulty.MEDIUM
+						R.id.difficulty_hard_chip -> Question.Difficulty.HARD
 						else -> Question.Difficulty.ANY
 					},
-					when(binding.typeRadioGroup.checkedRadioButtonId) {
-						R.id.type_any_radioButton -> Question.Type.ANY
-						R.id.type_multiple_choice_radioButton -> Question.Type.MULTIPLE
-						R.id.type_true_false_radioButton -> Question.Type.BOOLEAN
+					when(binding.typeChipGroup.checkedChipId) {
+						R.id.type_any_chip -> Question.Type.ANY
+						R.id.type_multiple_choice_chip -> Question.Type.MULTIPLE
+						R.id.type_true_false_chip -> Question.Type.BOOLEAN
 						else -> Question.Type.ANY
 					}
 				)
