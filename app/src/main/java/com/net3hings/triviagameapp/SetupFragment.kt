@@ -54,9 +54,21 @@ class SetupFragment : Fragment() {
 						0 -> 0
 						else -> binding.categorySpinner.selectedItemPosition + 8
 					},
-					Question.Difficulty.entries[binding.difficultySpinner.selectedItemPosition],
-					Question.Type.entries[binding.typeSpinner.selectedItemPosition]
+					when(binding.difficultyRadioGroup.checkedRadioButtonId) {
+						R.id.difficulty_any_radioButton -> Question.Difficulty.ANY
+						R.id.difficulty_easy_radioButton -> Question.Difficulty.EASY
+						R.id.difficulty_medium_radioButton -> Question.Difficulty.MEDIUM
+						R.id.difficulty_hard_radioButton -> Question.Difficulty.HARD
+						else -> Question.Difficulty.ANY
+					},
+					when(binding.typeRadioGroup.checkedRadioButtonId) {
+						R.id.type_any_radioButton -> Question.Type.ANY
+						R.id.type_multiple_choice_radioButton -> Question.Type.MULTIPLE
+						R.id.type_true_false_radioButton -> Question.Type.BOOLEAN
+						else -> Question.Type.ANY
+					}
 				)
+
 			)
 		}
 	}
