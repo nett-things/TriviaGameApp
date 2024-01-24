@@ -20,6 +20,8 @@ class MenuFragment : Fragment() {
 	): View {
 		binding = FragmentMenuBinding.inflate(inflater, container, false)
 
+		(activity as MainActivity).hideActionBar()
+
 		return binding.root
 	}
 

@@ -25,6 +25,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
 		setPreferencesFromResource(R.xml.preferences, rootKey)
 	}
 
+	override fun onCreateView(
+		inflater: LayoutInflater,
+		container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View {
+		(activity as MainActivity).showActionBar()
+
+		return super.onCreateView(inflater, container, savedInstanceState)
+	}
+
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
