@@ -1,7 +1,7 @@
 package com.net3hings.triviagameapp
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.net3hings.triviagameapp.database.StatisticsViewModel
 import com.net3hings.triviagameapp.databinding.FragmentQuestionBinding
 import com.net3hings.triviagameapp.question.Question
@@ -55,17 +56,18 @@ class QuestionFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		// get the original background color from a CardView
-		originalBackgroundColor = binding.answerACard.cardBackgroundColor.defaultColor
+		// get the original background from a Button
+		val colorStateList: ColorStateList? = binding.answerAButton.backgroundTintList
+		if (colorStateList != null)
+			originalBackgroundColor = colorStateList.defaultColor
 
 		// set up the listener for handling the go back button
 		requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
 			override fun handleOnBackPressed() {
-				AlertDialog.Builder(context)
+				MaterialAlertDialogBuilder(requireContext())
 					.setMessage(getString(R.string.quit_game_prompt))
 					.setPositiveButton(getString(R.string.yes_button)) { _, _ -> findNavController().popBackStack(R.id.menuFragment, false) }
 					.setNegativeButton(getString(R.string.no_button)) { _, _ -> }
-					.create()
 					.show()
 			}
 		})
@@ -74,12 +76,12 @@ class QuestionFragment : Fragment() {
 		nextQuestion(initial = true)
 
 		// set up the listeners for the answer buttons
-		binding.answerACard.setOnClickListener { resolveAnswer(Answer.A) }
-		binding.answerBCard.setOnClickListener { resolveAnswer(Answer.B) }
-		binding.answerCCard.setOnClickListener { resolveAnswer(Answer.C) }
-		binding.answerDCard.setOnClickListener { resolveAnswer(Answer.D) }
-		binding.answerTrueCard.setOnClickListener { resolveAnswer(Answer.TRUE) }
-		binding.answerFalseCard.setOnClickListener { resolveAnswer(Answer.FALSE) }
+		binding.answerAButton.setOnClickListener { resolveAnswer(Answer.A) }
+		binding.answerBButton.setOnClickListener { resolveAnswer(Answer.B) }
+		binding.answerCButton.setOnClickListener { resolveAnswer(Answer.C) }
+		binding.answerDButton.setOnClickListener { resolveAnswer(Answer.D) }
+		binding.answerTrueButton.setOnClickListener { resolveAnswer(Answer.TRUE) }
+		binding.answerFalseButton.setOnClickListener { resolveAnswer(Answer.FALSE) }
 
 		// set up the listener for the continuing the game
 		binding.container.setOnTouchListener { _, event ->
@@ -161,38 +163,38 @@ class QuestionFragment : Fragment() {
 
 			when(answer) {
 				Answer.A -> {
-					binding.answerALabel.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerBLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerCLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerDLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerAButton.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
 				}
 
 				Answer.B -> {
-					binding.answerALabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerBLabel.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerCLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerDLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerAButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBButton.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
 				}
 
 				Answer.C -> {
-					binding.answerALabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerBLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerCLabel.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerDLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerAButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCButton.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
 				}
 
 				Answer.D -> {
-					binding.answerALabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerBLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerCLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerDLabel.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerAButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDButton.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
 				}
 
 				else -> {
-					binding.answerALabel.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerBLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerCLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
-					binding.answerDLabel.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerAButton.text = Html.fromHtml(args.questions[currentQuestion].correctAnswer, Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerBButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[0], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerCButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[1], Html.FROM_HTML_MODE_COMPACT).toString()
+					binding.answerDButton.text = Html.fromHtml(args.questions[currentQuestion].incorrectAnswers[2], Html.FROM_HTML_MODE_COMPACT).toString()
 				}
 			}
 
@@ -203,30 +205,18 @@ class QuestionFragment : Fragment() {
 
 	private fun prepareForMultipleChoice() {
 		// make the boolean choice elements gone
-		binding.answerTrueCard.visibility = View.GONE
-		binding.answerFalseCard.visibility = View.GONE
-		binding.answerFalseCardSpace.visibility = View.GONE
+		binding.booleanChoiceContainer.visibility = View.GONE
 
 		// make the multiple choice elements visible
-		binding.answerACard.visibility = View.VISIBLE
-		binding.answerBCard.visibility = View.VISIBLE
-		binding.answerCCard.visibility = View.VISIBLE
-		binding.answerDCard.visibility = View.VISIBLE
-		binding.answerDCardSpace.visibility = View.VISIBLE
+		binding.multipleChoiceContainer.visibility = View.VISIBLE
 	}
 
 	private fun prepareForBooleanChoice() {
 		// make the multiple choice elements gone
-		binding.answerACard.visibility = View.GONE
-		binding.answerBCard.visibility = View.GONE
-		binding.answerCCard.visibility = View.GONE
-		binding.answerDCard.visibility = View.GONE
-		binding.answerDCardSpace.visibility = View.GONE
+		binding.multipleChoiceContainer.visibility = View.GONE
 
 		// make the boolean choice elements visible
-		binding.answerTrueCard.visibility = View.VISIBLE
-		binding.answerFalseCard.visibility = View.VISIBLE
-		binding.answerFalseCardSpace.visibility = View.VISIBLE
+		binding.booleanChoiceContainer.visibility = View.VISIBLE
 	}
 
 	private fun resolveAnswer(buttonClicked: Answer) {
@@ -235,30 +225,30 @@ class QuestionFragment : Fragment() {
 		totalTimeElapsed += timeElapsed
 
 		// mark all wrong
-		binding.answerACard.setCardBackgroundColor(requireContext().getColor(R.color.red))
-		binding.answerBCard.setCardBackgroundColor(requireContext().getColor(R.color.red))
-		binding.answerCCard.setCardBackgroundColor(requireContext().getColor(R.color.red))
-		binding.answerDCard.setCardBackgroundColor(requireContext().getColor(R.color.red))
-		binding.answerTrueCard.setCardBackgroundColor(requireContext().getColor(R.color.red))
-		binding.answerFalseCard.setCardBackgroundColor(requireContext().getColor(R.color.red))
+		binding.answerAButton.setBackgroundColor(requireContext().getColor(R.color.red))
+		binding.answerBButton.setBackgroundColor(requireContext().getColor(R.color.red))
+		binding.answerCButton.setBackgroundColor(requireContext().getColor(R.color.red))
+		binding.answerDButton.setBackgroundColor(requireContext().getColor(R.color.red))
+		binding.answerTrueButton.setBackgroundColor(requireContext().getColor(R.color.red))
+		binding.answerFalseButton.setBackgroundColor(requireContext().getColor(R.color.red))
 
 		// mark the correct answer
 		when(answer) {
-			Answer.A -> binding.answerACard.setCardBackgroundColor(requireContext().getColor(R.color.green))
-			Answer.B -> binding.answerBCard.setCardBackgroundColor(requireContext().getColor(R.color.green))
-			Answer.C -> binding.answerCCard.setCardBackgroundColor(requireContext().getColor(R.color.green))
-			Answer.D -> binding.answerDCard.setCardBackgroundColor(requireContext().getColor(R.color.green))
-			Answer.TRUE -> binding.answerTrueCard.setCardBackgroundColor(requireContext().getColor(R.color.green))
-			Answer.FALSE -> binding.answerFalseCard.setCardBackgroundColor(requireContext().getColor(R.color.green))
+			Answer.A -> binding.answerAButton.setBackgroundColor(requireContext().getColor(R.color.green))
+			Answer.B -> binding.answerBButton.setBackgroundColor(requireContext().getColor(R.color.green))
+			Answer.C -> binding.answerCButton.setBackgroundColor(requireContext().getColor(R.color.green))
+			Answer.D -> binding.answerDButton.setBackgroundColor(requireContext().getColor(R.color.green))
+			Answer.TRUE -> binding.answerTrueButton.setBackgroundColor(requireContext().getColor(R.color.green))
+			Answer.FALSE -> binding.answerFalseButton.setBackgroundColor(requireContext().getColor(R.color.green))
 		}
 
 		// disable clicking
-		binding.answerACard.isClickable = false
-		binding.answerBCard.isClickable = false
-		binding.answerCCard.isClickable = false
-		binding.answerDCard.isClickable = false
-		binding.answerTrueCard.isClickable = false
-		binding.answerFalseCard.isClickable = false
+		binding.answerAButton.isClickable = false
+		binding.answerBButton.isClickable = false
+		binding.answerCButton.isClickable = false
+		binding.answerDButton.isClickable = false
+		binding.answerTrueButton.isClickable = false
+		binding.answerFalseButton.isClickable = false
 
 		// update the prompt, score and correct answers count
 		if(buttonClicked == answer) {
@@ -284,22 +274,22 @@ class QuestionFragment : Fragment() {
 	}
 
 	private fun resetAnswers() {
-		binding.answerACard.setCardBackgroundColor(originalBackgroundColor)
-		binding.answerACard.isClickable = true
+		binding.answerAButton.setBackgroundColor(originalBackgroundColor)
+		binding.answerAButton.isClickable = true
 
-		binding.answerBCard.setCardBackgroundColor(originalBackgroundColor)
-		binding.answerBCard.isClickable = true
+		binding.answerBButton.setBackgroundColor(originalBackgroundColor)
+		binding.answerBButton.isClickable = true
 
-		binding.answerCCard.setCardBackgroundColor(originalBackgroundColor)
-		binding.answerCCard.isClickable = true
+		binding.answerCButton.setBackgroundColor(originalBackgroundColor)
+		binding.answerCButton.isClickable = true
 
-		binding.answerDCard.setCardBackgroundColor(originalBackgroundColor)
-		binding.answerDCard.isClickable = true
+		binding.answerDButton.setBackgroundColor(originalBackgroundColor)
+		binding.answerDButton.isClickable = true
 
-		binding.answerTrueCard.setCardBackgroundColor(originalBackgroundColor)
-		binding.answerTrueCard.isClickable = true
+		binding.answerTrueButton.setBackgroundColor(originalBackgroundColor)
+		binding.answerTrueButton.isClickable = true
 
-		binding.answerFalseCard.setCardBackgroundColor(originalBackgroundColor)
-		binding.answerFalseCard.isClickable = true
+		binding.answerFalseButton.setBackgroundColor(originalBackgroundColor)
+		binding.answerFalseButton.isClickable = true
 	}
 }
