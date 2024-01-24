@@ -40,15 +40,13 @@ class SetupFragment : Fragment() {
 			binding.numOfQuestionsLabel.text = getString(R.string.number_of_questions_label_text, value.toInt())
 		}
 
+		binding.categoryInputAutocomplete.setText(resources.getStringArray(R.array.category_array)[0], false)
 
 		binding.startGameButton.setOnClickListener {
 			findNavController().navigate(SetupFragmentDirections
 				.actionSetupFragmentToLoadingFragment(
 					binding.numberOfQuestionsSlider.value.toInt(),
-					when(binding.categorySpinner.selectedItemPosition) {
-						0 -> 0
-						else -> binding.categorySpinner.selectedItemPosition + 8
-					},
+					Helper.resolveCategoryToInt(binding.categoryInputAutocomplete.text.toString()),
 					when(binding.difficultyChipGroup.checkedChipId) {
 						R.id.difficulty_any_chip -> Question.Difficulty.ANY
 						R.id.difficulty_easy_chip -> Question.Difficulty.EASY

@@ -23,7 +23,38 @@ import com.patrykandpatrick.vico.core.marker.Marker
 import com.patrykandpatrick.vico.views.dimensions.dimensionsOf
 
 object Helper {
-	fun resolveCategory(category: Int): String {
+	fun resolveCategoryToInt(category: String): Int {
+		return when(category) {
+			"Any Category" -> 0
+			"General Knowledge" -> 9
+			"Entertainment: Books" -> 10
+			"Entertainment: Film" -> 11
+			"Entertainment: Music" -> 12
+			"Entertainment: Musicals &amp; Theatres" -> 13
+			"Entertainment: Television" -> 14
+			"Entertainment: Video Games" -> 15
+			"Entertainment: Board Games" -> 16
+			"Science &amp; Nature" -> 17
+			"Science: Computers" -> 18
+			"Science: Mathematics" -> 19
+			"Mythology" -> 20
+			"Sports" -> 21
+			"Geography" -> 22
+			"History" -> 23
+			"Politics" -> 24
+			"Art" -> 25
+			"Celebrities" -> 26
+			"Animals" -> 27
+			"Vehicles" -> 28
+			"Entertainment: Comics" -> 29
+			"Science: Gadgets" -> 30
+			"Entertainment: Japanese Anime &amp; Manga" -> 31
+			"Entertainment: Cartoon &amp; Animations" -> 32
+			else -> 0
+		}
+	}
+
+	fun resolveCategoryToString(category: Int): String {
 		return when(category) {
 			0 -> "Any Category"
 			9 -> "General Knowledge"
