@@ -60,9 +60,10 @@
 					app:layout_constraintStart_toEndOf="@+id/most_played_category"
 					app:layout_constraintTop_toTopOf="@+id/most_played_category" />
 
-				<View
+				<com.google.android.material.divider.MaterialDivider
 					android:id="@+id/average_correct_answers_divider"
-					style="@style/Divider"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
 					android:layout_marginTop="24dp"
 					app:layout_constraintEnd_toEndOf="parent"
 					app:layout_constraintStart_toStartOf="parent"
@@ -103,9 +104,10 @@
 					app:showBottomAxis="false"
 					app:showStartAxis="true" />
 
-				<View
+				<com.google.android.material.divider.MaterialDivider
 					android:id="@+id/average_score_divider"
-					style="@style/Divider"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
 					android:layout_marginTop="24dp"
 					app:layout_constraintEnd_toEndOf="parent"
 					app:layout_constraintStart_toStartOf="parent"
@@ -147,9 +149,10 @@
 					app:showBottomAxis="false"
 					app:showStartAxis="true" />
 
-				<View
+				<com.google.android.material.divider.MaterialDivider
 					android:id="@+id/average_answer_time_divider"
-					style="@style/Divider"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
 					android:layout_marginTop="24dp"
 					app:layout_constraintEnd_toEndOf="parent"
 					app:layout_constraintStart_toStartOf="parent"
