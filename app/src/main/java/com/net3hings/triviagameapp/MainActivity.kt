@@ -17,8 +17,6 @@ import com.net3hings.triviagameapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 	private lateinit var binding: ActivityMainBinding
-	private lateinit var navController: NavController
-	private lateinit var appBarConfiguration: AppBarConfiguration
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -32,8 +30,6 @@ class MainActivity : AppCompatActivity() {
 
 		binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
-
-		setupActionBar()
 	}
 
 	fun setThemeMode(mode: String, lightsOut: Boolean) {
@@ -61,35 +57,5 @@ class MainActivity : AppCompatActivity() {
 				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 			}
 		}
-	}
-
-	@SuppressLint("RestrictedApi")
-	fun showActionBar() {
-		supportActionBar?.setShowHideAnimationEnabled(false)
-		supportActionBar?.show()
-	}
-
-	@SuppressLint("RestrictedApi")
-	fun hideActionBar() {
-		supportActionBar?.setShowHideAnimationEnabled(false)
-		supportActionBar?.hide()
-	}
-
-	private fun setupActionBar() {
-		navController = findNavController(R.id.nav_host_fragment_container)
-		appBarConfiguration = AppBarConfiguration(navController.graph)
-		setupActionBarWithNavController(navController, appBarConfiguration)
-
-		supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.transparent)))
-	}
-
-	override fun onCreateOptionsMenu(menu: Menu): Boolean {
-		menuInflater.inflate(R.menu.menu_main, menu)
-
-		return true
-	}
-
-	override fun onSupportNavigateUp(): Boolean {
-		return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
 	}
 }

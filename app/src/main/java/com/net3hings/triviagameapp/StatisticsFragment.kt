@@ -37,8 +37,6 @@ class StatisticsFragment : Fragment() {
 	): View {
 		binding = FragmentStatisticsBinding.inflate(inflater, container, false)
 
-		(activity as MainActivity).showActionBar()
-
 		return binding.root
 	}
 
