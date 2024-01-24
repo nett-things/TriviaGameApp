@@ -1,7 +1,5 @@
 package com.net3hings.triviagameapp
 
-import android.app.AlertDialog
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.net3hings.triviagameapp.database.StatisticsViewModel
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -76,11 +75,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
 		}
 
 		button?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-			AlertDialog.Builder(context)
+			MaterialAlertDialogBuilder(requireContext())
 				.setMessage(getString(R.string.clear_statistics_prompt))
 				.setPositiveButton(getString(R.string.confirm_button)) { _, _ -> viewModel.clearAll() }
-				.setNegativeButton(getString(R.string.cancel_button)) { _, _ -> }
-				.create()
+				.setNeutralButton(getString(R.string.cancel_button)) { _, _ -> }
 				.show()
 
 			true
