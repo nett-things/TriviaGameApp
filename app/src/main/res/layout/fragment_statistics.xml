@@ -209,12 +209,12 @@
 				app:layout_constraintTop_toTopOf="parent"
 				tools:visibility="gone" />
 
-			<ProgressBar
+			<com.google.android.material.progressindicator.CircularProgressIndicator
 				android:id="@+id/progressBar"
-				style="?android:attr/progressBarStyle"
-				android:layout_width="100dp"
-				android:layout_height="100dp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:indeterminate="true"
+				app:indicatorSize="64dp"
 				android:visibility="visible"
 				app:layout_constraintBottom_toBottomOf="parent"
 				app:layout_constraintEnd_toEndOf="parent"
@@ -223,7 +223,5 @@
 				tools:visibility="gone" />
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
-
-
 	</ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
