@@ -92,17 +92,19 @@
 					app:layout_constraintStart_toStartOf="parent"
 					app:layout_constraintTop_toBottomOf="@+id/average_correct_answers_label" />
 
-				<com.patrykandpatrick.vico.views.chart.ChartView
+				<com.patrykandpatrick.vico.views.chart.CartesianChartView
 					android:id="@+id/average_correct_answers_chart"
 					android:layout_width="0dp"
 					android:layout_height="176dp"
 					android:layout_marginEnd="24dp"
-					app:chart="line"
 					app:layout_constraintEnd_toEndOf="parent"
 					app:layout_constraintStart_toStartOf="parent"
 					app:layout_constraintTop_toBottomOf="@+id/average_correct_answers"
 					app:showBottomAxis="false"
-					app:showStartAxis="true" />
+					app:showStartAxis="true"
+					app:chartZoomEnabled="false"
+					app:layers="line"
+					app:chartHorizontalScrollingEnabled="false"/>
 
 				<com.google.android.material.divider.MaterialDivider
 					android:id="@+id/average_score_divider"
@@ -137,17 +139,19 @@
 					app:layout_constraintStart_toStartOf="parent"
 					app:layout_constraintTop_toBottomOf="@+id/average_score_label" />
 
-				<com.patrykandpatrick.vico.views.chart.ChartView
+				<com.patrykandpatrick.vico.views.chart.CartesianChartView
 					android:id="@+id/average_score_chart"
 					android:layout_width="0dp"
 					android:layout_height="176dp"
 					android:layout_marginEnd="24dp"
-					app:chart="line"
 					app:layout_constraintEnd_toEndOf="parent"
 					app:layout_constraintStart_toStartOf="parent"
 					app:layout_constraintTop_toBottomOf="@+id/average_score"
 					app:showBottomAxis="false"
-					app:showStartAxis="true" />
+					app:showStartAxis="true"
+					app:chartZoomEnabled="false"
+					app:layers="line"
+					app:chartHorizontalScrollingEnabled="false"/>
 
 				<com.google.android.material.divider.MaterialDivider
 					android:id="@+id/average_answer_time_divider"
@@ -182,17 +186,19 @@
 					app:layout_constraintStart_toStartOf="parent"
 					app:layout_constraintTop_toBottomOf="@+id/average_answer_time_label" />
 
-				<com.patrykandpatrick.vico.views.chart.ChartView
+				<com.patrykandpatrick.vico.views.chart.CartesianChartView
 					android:id="@+id/average_answer_time_chart"
 					android:layout_width="0dp"
 					android:layout_height="176dp"
 					android:layout_marginEnd="24dp"
-					app:chart="line"
 					app:layout_constraintEnd_toEndOf="parent"
 					app:layout_constraintStart_toStartOf="parent"
 					app:layout_constraintTop_toBottomOf="@+id/average_answer_time"
 					app:showBottomAxis="false"
-					app:showStartAxis="true" />
+					app:showStartAxis="true"
+					app:chartZoomEnabled="false"
+					app:layers="line"
+					app:chartHorizontalScrollingEnabled="false"/>
 
 
 			</androidx.constraintlayout.widget.ConstraintLayout>

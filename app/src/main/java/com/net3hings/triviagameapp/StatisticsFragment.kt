@@ -11,9 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.net3hings.triviagameapp.database.StatisticsItem
 import com.net3hings.triviagameapp.database.StatisticsViewModel
 import com.net3hings.triviagameapp.databinding.FragmentStatisticsBinding
-import com.patrykandpatrick.vico.core.axis.formatter.DecimalFormatAxisValueFormatter
-import com.patrykandpatrick.vico.core.axis.vertical.VerticalAxis
-import com.patrykandpatrick.vico.core.entry.entryModelOf
+import com.patrykandpatrick.vico.core.model.CartesianChartModelProducer
+import com.patrykandpatrick.vico.core.model.lineSeries
 
 class StatisticsFragment : Fragment() {
 	private lateinit var binding: FragmentStatisticsBinding
@@ -30,6 +29,12 @@ class StatisticsFragment : Fragment() {
 	private var avgCorrectAnswers: MutableList<Double> = mutableListOf()
 	private var avgScores: MutableList<Double> = mutableListOf()
 	private var avgAnswerTimes: MutableList<Double> = mutableListOf()
+
+	private var averageCorrectAnswersChartModelProducer = CartesianChartModelProducer.build()
+	private var averageScoreChartModelProducer = CartesianChartModelProducer.build()
+	private var averageAnswerTimeChartModelProducer = CartesianChartModelProducer.build()
+
+	private var alreadySetup: Boolean = false
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +63,7 @@ class StatisticsFragment : Fragment() {
 
 				if(items!!.isNotEmpty()) {
 					calculateData()
-					setupCharts()
+					if(!alreadySetup) setupCharts()
 					displayData()
 
 					binding.progressBar.visibility = View.GONE
@@ -87,27 +92,22 @@ class StatisticsFragment : Fragment() {
 	}
 
 	private fun setupCharts() {
-		with(binding) {
-			val averageCorrectAnswersChartVerticalAxis = averageCorrectAnswersChart.startAxis as VerticalAxis
-			averageCorrectAnswersChartVerticalAxis.valueFormatter = DecimalFormatAxisValueFormatter("###%")
-			averageCorrectAnswersChart.startAxis = averageCorrectAnswersChartVerticalAxis
-
-			averageCorrectAnswersChart.marker = Helper.makeMarker(requireContext())
-
-
-			val averageScoreChartVerticalAxis = averageScoreChart.startAxis as VerticalAxis
-			averageScoreChartVerticalAxis.valueFormatter = DecimalFormatAxisValueFormatter("###,###")
-			averageScoreChart.startAxis = averageScoreChartVerticalAxis
-
-			averageScoreChart.marker = Helper.makeMarker(requireContext())
-
-
-			val averageAnswerTimeChartVerticalAxis = averageAnswerTimeChart.startAxis as VerticalAxis
-			averageAnswerTimeChartVerticalAxis.valueFormatter = DecimalFormatAxisValueFormatter("###,###.#")
-			averageAnswerTimeChart.startAxis = averageAnswerTimeChartVerticalAxis
-
-			averageAnswerTimeChart.marker = Helper.makeMarker(requireContext())
+		binding.averageCorrectAnswersChart.modelProducer = averageCorrectAnswersChartModelProducer
+		averageCorrectAnswersChartModelProducer.tryRunTransaction {
+			lineSeries { series(avgCorrectAnswers) }
 		}
+
+		binding.averageScoreChart.modelProducer = averageScoreChartModelProducer
+		averageScoreChartModelProducer.tryRunTransaction {
+			lineSeries { series(avgScores) }
+		}
+
+		binding.averageAnswerTimeChart.modelProducer = averageAnswerTimeChartModelProducer
+		averageAnswerTimeChartModelProducer.tryRunTransaction {
+			lineSeries { series(avgAnswerTimes) }
+		}
+
+		alreadySetup = true
 	}
 
 	private fun displayData() {
@@ -118,12 +118,9 @@ class StatisticsFragment : Fragment() {
 			getString(R.string.average_correct_answers_text,
 			avgCorrectAnswers.last() * 100
 		)
-		binding.averageCorrectAnswersChart.setModel(entryModelOf(Helper.convertToListOfFloatEntries(avgCorrectAnswers)))
 
 		binding.averageScore.text = getString(R.string.average_score_text, avgScores.last())
-		binding.averageScoreChart.setModel(entryModelOf(Helper.convertToListOfFloatEntries(avgScores)))
 
 		binding.averageAnswerTime.text = getString(R.string.average_answer_time_text, avgAnswerTimes.last())
-		binding.averageAnswerTimeChart.setModel(entryModelOf(Helper.convertToListOfFloatEntries(avgAnswerTimes)))
 	}
 }
