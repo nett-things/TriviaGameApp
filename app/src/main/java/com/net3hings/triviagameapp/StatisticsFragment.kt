@@ -111,14 +111,8 @@ class StatisticsFragment : Fragment() {
 	}
 
 	private fun displayData() {
-		binding.mostPlayedCategory.text = getString(
-			R.string.most_played_category_text,
-			Helper.resolveCategoryToString(mostPlayedCategory)
-		)
-		binding.mostPlayedCategoryPercent.text = getString(
-			R.string.most_played_category_percent_text,
-			mostPlayedCategoryPercent * 100
-		)
+		binding.mostPlayedCategory.text = getString(R.string.most_played_category_text, Helper.resolveCategoryToString(mostPlayedCategory))
+		binding.mostPlayedCategoryPercent.text = getString(R.string.most_played_category_percent_text, mostPlayedCategoryPercent * 100)
 
 		binding.averageCorrectAnswers.text =
 			getString(R.string.average_correct_answers_text,
