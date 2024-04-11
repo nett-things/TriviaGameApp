@@ -50,8 +50,8 @@ dependencies {
 	implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
 	// NavFragment
-	implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
-	implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+	implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+	implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
 	// Retrofit and Moshi
 	implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
@@ -73,8 +73,8 @@ dependencies {
 	implementation("androidx.preference:preference-ktx:1.2.1")
 
 	// Vico
-	implementation("com.patrykandpatrick.vico:core:1.13.1")
-	implementation("com.patrykandpatrick.vico:views:1.13.1")
+	implementation("com.patrykandpatrick.vico:core:2.0.0-alpha.14")
+	implementation("com.patrykandpatrick.vico:views:2.0.0-alpha.14")
 
 	// Test implementations
 	testImplementation("junit:junit:4.13.2")
