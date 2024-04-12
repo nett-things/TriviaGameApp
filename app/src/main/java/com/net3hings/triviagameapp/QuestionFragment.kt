@@ -95,6 +95,16 @@ class QuestionFragment : Fragment() {
 		}
 	}
 
+	override fun onResume() {
+		super.onResume()
+		(activity as MainActivity).supportActionBar?.hide()
+	}
+
+	override fun onStop() {
+		super.onStop()
+		(activity as MainActivity).supportActionBar?.show()
+	}
+
 	private fun nextQuestion(initial: Boolean = false) {
 		if(args.questions.size > currentQuestion + 1) {
 			if(!initial) {
