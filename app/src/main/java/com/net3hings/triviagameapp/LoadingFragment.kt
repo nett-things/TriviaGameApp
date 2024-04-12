@@ -81,12 +81,22 @@ class LoadingFragment : Fragment() {
 
 			withContext(Dispatchers.Main) {
 				if(questions != null)
-					findNavController().navigate(LoadingFragmentDirections.actionLoadingFragmentToQuestionFragment(
-						args.numOfQuestions, args.category, args.difficulty.ordinal, args.type.ordinal, questions!!.toTypedArray()
-					))
+					view?.post {
+						findNavController().navigate(
+							LoadingFragmentDirections.actionLoadingFragmentToQuestionFragment(
+								args.numOfQuestions,
+								args.category,
+								args.difficulty.ordinal,
+								args.type.ordinal,
+								questions!!.toTypedArray()
+							)
+						)
+					}
 				else {
 					Snackbar.make(binding.root, getString(R.string.cannot_load_msg), Snackbar.LENGTH_LONG).show()
-					findNavController().popBackStack()
+					view?.post {
+						findNavController().popBackStack()
+					}
 				}
 			}
 		}
