@@ -50,6 +50,16 @@ class LoadingFragment : Fragment() {
 		populateQuestions()
 	}
 
+	override fun onResume() {
+		super.onResume()
+		(activity as MainActivity).supportActionBar?.hide()
+	}
+
+	override fun onStop() {
+		super.onStop()
+		(activity as MainActivity).supportActionBar?.show()
+	}
+
 	@OptIn(DelicateCoroutinesApi::class)
 	fun populateQuestions() {
 		GlobalScope.launch {
